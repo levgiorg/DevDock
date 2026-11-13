@@ -15,7 +15,7 @@ for name in sorted(set(files)):
     if re.search('[\u3400-\u9fff\uf900-\ufaff\u3040-\u30ff]', text):
         errors.append(f'{name}: non-English CJK source content')
     if name.startswith(('DevDock/Sources/', 'app/')):
-        for pattern in [r'NSAppleScript', r'with administrator privileges', r'@vercel/analytics', r'@vercel/speed-insights', r'fetch\(\s*[\'"]https?://']:
+        for pattern in [r'NSAppleScript', r'with administrator privileges', r'@[^/]+/(?:analytics|speed-insights)', r'fetch\(\s*[\'"]https?://']:
             if re.search(pattern, text): errors.append(f'{name}: forbidden automatic network or privileged execution pattern {pattern}')
     if name.endswith('.sh'):
         if 'set -euo pipefail' not in text and 'set -Eeuo pipefail' not in text:

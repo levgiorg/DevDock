@@ -34,7 +34,6 @@ npm run dev -- --port $port
 
 Then make the dev server refuse to fall back to another port, so a collision shows up as an error the agent can see. For Vite, set `server.strictPort: true`. For other tools, prefer an explicit `--port` over automatic fallback.
 
-**Or skip port numbers entirely.** [Portless](https://github.com/vercel-labs/portless) gives each app a stable named URL such as `https://myapp.localhost`, which is easier to tell apart than 3000 and 3007.
 
 ## Tell agents which server is theirs
 

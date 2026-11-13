@@ -47,16 +47,16 @@ enum Theme {
     static let inset: CGFloat = 16
 
     // Three sizes (28 display, 13 body, 11 caption) and two weights.
-    static let display = Font.custom("GeistMono-Medium", fixedSize: 28)
+    static let display = Font.system(size: 28, weight: .medium, design: .monospaced)
     /// Display size for names rather than numbers.
-    static let displaySans = Font.custom("Geist-Medium", fixedSize: 28)
-    static let body = Font.custom("Geist-Regular", fixedSize: 13)
-    static let bodyMedium = Font.custom("Geist-Medium", fixedSize: 13)
-    static let caption = Font.custom("Geist-Regular", fixedSize: 11)
-    static let captionMedium = Font.custom("Geist-Medium", fixedSize: 11)
-    static let mono = Font.custom("GeistMono-Regular", fixedSize: 13)
-    static let monoMedium = Font.custom("GeistMono-Medium", fixedSize: 13)
-    static let monoCaption = Font.custom("GeistMono-Regular", fixedSize: 11)
+    static let displaySans = Font.system(size: 28, weight: .medium)
+    static let body = Font.system(size: 13)
+    static let bodyMedium = Font.system(size: 13, weight: .medium)
+    static let caption = Font.system(size: 11)
+    static let captionMedium = Font.system(size: 11, weight: .medium)
+    static let mono = Font.system(size: 13, design: .monospaced)
+    static let monoMedium = Font.system(size: 13, weight: .medium, design: .monospaced)
+    static let monoCaption = Font.system(size: 11, design: .monospaced)
 }
 
 /// Raw colors shared by the app and the `wtp` terminal UI.
@@ -77,38 +77,6 @@ enum Palette {
         (0x87449E, 0xD9A3F2), // lilac
         (0x4C627D, 0xABC2E0), // slate
     ]
-}
-
-enum FontLoader {
-    private static var registered = false
-
-    /// Registers the bundled Geist fonts for this process. In the .app they live
-    /// in Contents/Resources/Fonts; when running from `swift run` we fall back to
-    /// the package's Resources folder.
-    static func registerBundledFonts() {
-        guard !registered else { return }
-        registered = true
-        let bundled = Bundle.main.resourceURL?.appendingPathComponent("Fonts")
-        let source = URL(fileURLWithPath: #filePath)
-            .deletingLastPathComponent() // UI
-            .deletingLastPathComponent() // DevDock
-            .deletingLastPathComponent() // Sources
-            .deletingLastPathComponent() // package root
-            .appendingPathComponent("Resources/Fonts")
-        for directory in [bundled, source].compactMap({ $0 }) {
-            guard let files = try? FileManager.default.contentsOfDirectory(at: directory, includingPropertiesForKeys: nil) else { continue }
-            let fonts = files.filter { $0.pathExtension == "ttf" }
-            guard !fonts.isEmpty else { continue }
-            for font in fonts {
-                CTFontManagerRegisterFontsForURL(font as CFURL, .process, nil)
-            }
-            return
-        }
-    }
-
-    static func nsFont(_ name: String, size: CGFloat) -> NSFont {
-        NSFont(name: name, size: size) ?? .monospacedDigitSystemFont(ofSize: size, weight: .medium)
-    }
 }
 
 enum Format {

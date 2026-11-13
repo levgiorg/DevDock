@@ -9,7 +9,6 @@ import {
   ConductorIcon,
   GitHubIcon,
   PaneIcon,
-  VercelIcon,
 } from './icons'
 import { portColor } from './servers'
 import { DOWNLOAD_URL, GITHUB_URL } from './sections'
@@ -52,7 +51,6 @@ const TOOLS = [
   { name: 'Codex', detail: 'codex resume', icon: <CodexIcon color="#F5F5F7" size={14} width={1.1} /> },
   { name: 'Conductor', detail: 'workspace name', icon: <ConductorIcon /> },
   { name: 'Pane', detail: 'opens the terminal', icon: <PaneIcon /> },
-  { name: 'Vercel', detail: 'preview per branch', icon: <VercelIcon /> },
 ]
 
 const COMMANDS = [
@@ -88,7 +86,7 @@ export function SectionCopy({ index, stars }: { index: number; stars: number | n
           <h2 className={styles.headline}>Knows which agent started it.</h2>
           <p className={styles.body}>
             Servers launched by Claude Code, Codex, Conductor or Pane link back to the session that started them. Pick up
-            the conversation, check the branch, or open the Vercel preview for the same commit.
+            the conversation or check the branch.
           </p>
           <ul className={styles.list}>
             {TOOLS.map((tool) => (
@@ -160,7 +158,7 @@ export function SectionCopy({ index, stars }: { index: number; stars: number | n
       return (
         <div className={styles.copy}>
           <h2 className={styles.headline}>Know what’s running.</h2>
-          <p className={styles.body}>Two white dots when everything’s fine. You’ll know when it isn’t.</p>
+          <p className={styles.body}>Ports, projects and containers, one menu bar away.</p>
           <Cta stars={stars} location="get-it" />
           <ul className={styles.list}>
             {FACTS.map((fact) => (

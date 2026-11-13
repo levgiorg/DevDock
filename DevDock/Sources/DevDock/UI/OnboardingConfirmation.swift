@@ -7,8 +7,8 @@ enum OnboardingStyle {
     static let success = Theme.adaptive(light: 0x37704A, dark: 0x9BC6AA)
     static let surface = Theme.adaptive(light: 0xEBEBED, dark: 0x28282B)
     static let divider = Theme.adaptive(light: 0xD4D4D7, dark: 0x38383B)
-    static let label = Font.custom("Geist-Regular", fixedSize: 12)
-    static let evidence = Font.custom("GeistMono-Regular", fixedSize: 12)
+    static let label = Font.system(size: 12)
+    static let evidence = Font.system(size: 12, design: .monospaced)
 }
 
 struct OnboardingSummary: View {

@@ -15,7 +15,6 @@ struct DevDockApp: App {
     @StateObject private var monitor: ServerMonitor
 
     init() {
-        FontLoader.registerBundledFonts()
         Preferences.register()
         // Initialize AppKit for snapshot mode without overriding its appearance.
         _ = NSApplication.shared

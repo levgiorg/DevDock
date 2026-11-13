@@ -8,7 +8,7 @@ A native macOS menu bar app for local development ports, processes, Git worktree
 
 [Source and issues](https://github.com/levgiorg/DevDock) · [Security review](docs/audit/REPORT.md) · [Verification](docs/audit/VERIFICATION.md) · [Brand assets](docs/brand/README.md)
 
-![Native menu bar with disposable process and Docker fixtures](docs/images/audited-servers.png)
+![Native server list rendered with deterministic stopped-container fixtures](docs/images/audited-servers.png)
 
 - Discover local TCP listeners, PIDs, project folders, Git branches/worktrees and Claude Code session metadata.
 - Inspect ports, resource usage and known local Docker runtime mappings, including configured stopped-container ports.
@@ -76,7 +76,7 @@ Every push to `main` and pull request runs website/browser/security checks, nati
 
 Process actions validate the current user, exact PID birth time, executable, directory and port ownership. Delayed force-quit refreshes those checks. Docker actions use bounded local Unix-socket requests and immutable full container IDs with fresh state/mapping inspection. Remote Docker contexts are unsupported. These safeguards reduce risk; they do not prove complete security.
 
-Production deployment is manual. Publishing, notarization uploads, merges and deployments require separate approval. Release artifacts require Developer ID signing, hardened runtime, signed update metadata and accepted notarization. See [release setup](DevDock/UPDATES.md).
+No website deployment workflow is configured. Publishing, notarization uploads, merges and deployments require separate approval. Release artifacts require Developer ID signing, hardened runtime, signed update metadata and accepted notarization. See [release setup](DevDock/UPDATES.md).
 
 ## License
 

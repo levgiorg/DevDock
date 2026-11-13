@@ -8,7 +8,7 @@
   background-image: radial-gradient(ellipse 90% 520px at 0% 0% in oklab, oklab(31% 0.003 -0.04) 0%, oklab(15.9% -0.0004 -0.011 / 0%) 70%);
   background-repeat: no-repeat;
   color: #ffffff;
-  font-family: 'Geist', system-ui, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 16px;
   line-height: 26px;
   -webkit-font-smoothing: antialiased;
@@ -377,7 +377,7 @@
 }
 
 .prose code {
-  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
   font-size: 13px;
   color: #ffffff;
 }

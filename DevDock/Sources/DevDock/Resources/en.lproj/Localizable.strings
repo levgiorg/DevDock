@@ -189,7 +189,6 @@
 "Ports published by Docker Desktop, OrbStack, Colima and Rancher Desktop containers. Stop and restart act on the container, not the runtime." = "Ports published by Docker Desktop, OrbStack, Colima and Rancher Desktop containers. Stop and restart act on the container, not the runtime.";
 "Preview" = "Preview";
 "Preview build failed · %@" = "Preview build failed · %@";
-"Preview button for each branch, from Vercel's GitHub deployments" = "Preview button for each branch, from Vercel's GitHub deployments";
 "Privacy" = "Privacy";
 "Processes" = "Processes";
 "Protected processes" = "Protected processes";
@@ -219,7 +218,6 @@
 "Scanning…" = "Scanning…";
 "See and stop your servers from any terminal. Click to add the wtp command." = "See and stop your servers from any terminal. Click to add the wtp command.";
 "See exactly what’s sent. You can change this in Settings." = "See exactly what’s sent. You can change this in Settings.";
-"See the preview deployment for whatever branch each server is running. Optional." = "See the preview deployment for whatever branch each server is running. Optional.";
 "Send Feedback" = "Send Feedback";
 "Send a notification" = "Send a notification";
 "Sends SIGTERM to the whole process tree first" = "Sends SIGTERM to the whole process tree first";
@@ -238,7 +236,6 @@
 "Show branch prefixes" = "Show branch prefixes";
 "Show containers" = "Show containers";
 "Show popover with ⌥⌘P" = "Show popover with ⌥⌘P";
-"Show preview buttons" = "Show preview buttons";
 "Show the pull request for each branch" = "Show the pull request for each branch";
 "Show transcript" = "Show transcript";
 "Show workspace names" = "Show workspace names";
@@ -276,9 +273,7 @@
 "Unlit dots stay hidden until there's something to show" = "Unlit dots stay hidden until there's something to show";
 "Updates" = "Updates";
 "Updates are available in the installed app." = "Updates are available in the installed app.";
-"Uses Vercel’s GitHub deployments through gh" = "Uses Vercel’s GitHub deployments through gh";
 "Uses the GitHub CLI you're already signed in to." = "Uses the GitHub CLI you're already signed in to.";
-"Vercel previews" = "Vercel previews";
 "Version %@" = "Version %@";
 "Version %@ (%@)" = "Version %@ (%@)";
 "DevDock Terminal" = "DevDock Terminal";

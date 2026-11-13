@@ -1,6 +1,6 @@
-# The download is always the latest release
+# Downloads and hosting
 
-Never commit `public/DevDock.dmg` or `public/updates/`. The deploy workflow builds them for each production deploy, and `scripts/check-download.mjs` fails production builds whose download isn't this commit's release. Local dev and previews serve only a locally built DevDock artifact; they never redirect to the upstream app. Don't link a versioned archive such as `/updates/DevDock-4.zip` from the site or README; always link `/DevDock.dmg`.
+Never commit `public/DevDock.dmg` or `public/updates/`. GitHub release candidates are built through the manual release workflow. Local website previews serve only a locally built artifact. Set `REQUIRE_DOWNLOAD=1` when packaging a website that promises a bundled DMG; the download checker validates its format and update metadata. No website deployment service or cloud-preview integration is configured. Link `/DevDock.dmg` for a bundled website download or the appropriate GitHub release asset.
 
 # Releases require explicit approval
 
@@ -23,3 +23,7 @@ The native macOS app is the source of truth for product UI and behavior. Wheneve
 # Guides and agent-readable pages
 
 Articles live in `content/guides/*.md` (frontmatter: `title`, `description`, `published`, `updated`, `order`, `keywords`) and render at `/guides/<slug>`. Every page is also served as Markdown (`/index.md`, `/guides.md`, `/guides/<slug>.md`, or any page with `Accept: text/markdown`), and listed in `/llms.txt`, `/llms-full.txt` and `/sitemap.xml`, all generated from `content/`. Test every shell command in a guide on a Mac before publishing it, and keep claims about DevDock in line with the app's defaults in `Preferences.swift` and `ServerMonitor.swift`.
+
+# Native layout and legal notices
+
+Use system fonts without bundled font binaries. Server-row text must shrink/truncate within the popover, and the hover action slot must keep a constant width. Preserve the layout regression test with stopped containers and long context. The owner's modification copyright belongs in LICENSE; the full required inherited and dependency permission notices belong in THIRD_PARTY_NOTICES.md and must be packaged with the app. Do not remove mandatory notices or reintroduce cloud-provider onboarding.

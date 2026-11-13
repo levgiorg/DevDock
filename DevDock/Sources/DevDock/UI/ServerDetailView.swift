@@ -291,21 +291,6 @@ struct ServerDetailView: View {
             .buttonStyle(PillButtonStyle(kind: .primary))
             .keyboardShortcut(.defaultAction)
 
-            if let preview = github.result(for: server)?.preview {
-                Button {
-                    Usage.record(.vercelPreview)
-                    NSWorkspace.shared.open(preview.url)
-                } label: {
-                    HStack(spacing: 6) {
-                        Image(systemName: "triangle.fill").font(.system(size: 9))
-                        Text(preview.state == .building ? L10n.text("Building") : L10n.text("Preview"))
-                    }
-                    .foregroundStyle(preview.state == .failed ? Theme.softRed : Theme.text1)
-                }
-                .buttonStyle(PillButtonStyle())
-                .help(preview.state == .failed ? L10n.format("Preview build failed · %@", preview.url.host ?? "") : preview.url.absoluteString)
-            }
-
             Menu {
                 Button(L10n.text("Copy URL")) { copy(server.url.absoluteString) }
                 if let command = server.command { Button(L10n.text("Copy command")) { copy(command) } }

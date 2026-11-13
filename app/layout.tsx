@@ -69,8 +69,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="preload" href="/fonts/Geist-Regular.ttf" as="font" type="font/ttf" crossOrigin="" />
-        <link rel="preload" href="/fonts/Geist-Medium.ttf" as="font" type="font/ttf" crossOrigin="" />
         <link rel="preload" href="/scenes/house.jpg" as="image" />
         <link rel="preload" href="/scenes/laptop.jpg" as="image" />
         <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />

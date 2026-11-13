@@ -39,3 +39,7 @@ Developer ID signing, notarization/stapling, quarantined downloaded-app launch, 
 ## Public CI/release preparation checkpoint
 
 The owner subsequently deleted the private remote and authorized recreating `levgiorg/DevDock` publicly. Current local checks pass for the website/native regressions, workflow syntax (Actionlint), shell checks, Go race tests/vet and Go vulnerability audit using Go 1.27.4. Real Linux procfs/listener tests also pass in an isolated non-root, read-only, network-disabled Linux container without access to the developer's Docker daemon socket. The macOS development candidate is version 2.8.0, build 12; its DMG filename explicitly says unnotarized and its checksum verifies. Public GitHub CI and real Linux-host Docker lifecycle results are recorded after the runs finish. No Apple signing/notarization credentials are available, and draft preparation does not constitute approval to publish an unnotarized macOS package.
+
+## Local layout and integration cleanup
+
+See [UI cleanup evidence](UI-CLEANUP.md) for the new native width/hover regression, its expected failure on the prior layout, 86-test native suite, eight browser checks, current system-font UI, removed cloud-preview/deployment integration, and local build-13 installation. This change is local until separately approved for a source push or release update.

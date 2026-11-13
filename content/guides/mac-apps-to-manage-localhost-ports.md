@@ -31,7 +31,6 @@ Free, always there, and works over SSH. The downside is that you only see what y
 - [**kill-port**](https://www.npmjs.com/package/kill-port): `npx kill-port 3000`. Kills whatever is on a port. Popular in `predev` scripts.
 - [**fkill-cli**](https://github.com/sindresorhus/fkill-cli): an interactive, fuzzy-searchable process killer.
 - [**portrm**](https://portrm.dev): a CLI for inspecting and freeing ports, with safety checks before it kills anything.
-- [**Portless**](https://github.com/vercel-labs/portless), from Vercel Labs, takes a different approach: it replaces port numbers with stable named URLs like `https://myapp.localhost`, “for humans and agents”. It prevents collisions rather than cleaning up after them, and works alongside any of the tools here.
 
 ## 3. Launcher extensions
 

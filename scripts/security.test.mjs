@@ -23,7 +23,7 @@ test('Markdown sanitization blocks scripts, handlers, external schemes and SVG',
 
 test('telemetry dependencies and native update defaults stay disabled', () => {
   const pkg = JSON.parse(readFileSync('package.json', 'utf8'))
-  assert(!Object.keys(pkg.dependencies).some(x => x.includes('@vercel/')))
+  assert(!Object.keys(pkg.dependencies).some(x => /analytics|speed-insights/.test(x)))
   const usage = readFileSync('DevDock/Sources/DevDock/Engine/Usage.swift', 'utf8')
   assert.doesNotMatch(usage, /URLSession|https:\/\//)
   const plist = readFileSync('DevDock/Info.plist', 'utf8')

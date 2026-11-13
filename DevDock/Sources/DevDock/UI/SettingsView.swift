@@ -337,7 +337,6 @@ private struct IntegrationsPane: View {
     @AppStorage(Preferences.showBranches) private var branches = true
     @AppStorage(Preferences.showBranchPrefixes) private var branchPrefixes = false
     @AppStorage(Preferences.showContainers) private var containers = true
-    @AppStorage(Preferences.vercelPreviews) private var previews = false
     @AppStorage(Preferences.githubPullRequests) private var pullRequests = false
 
     var body: some View {
@@ -369,9 +368,6 @@ private struct IntegrationsPane: View {
                 }
             }
             Section {
-                Toggle(isOn: $previews) {
-                    SettingLabel(L10n.text("Vercel previews"), caption: L10n.text("Preview button for each branch, from Vercel's GitHub deployments"))
-                }
                 Toggle(isOn: $pullRequests) {
                     SettingLabel(L10n.text("Pull requests"), caption: L10n.text("Show the pull request for each branch"))
                 }

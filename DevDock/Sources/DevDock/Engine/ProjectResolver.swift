@@ -7,7 +7,6 @@ struct ProjectInfo: Equatable {
     var branch: String?
     var isWorktree: Bool = false
     var worktreeName: String?
-    var hasVercel: Bool = false
     var showsBranchPrefix: Bool = false
 
     /// The branch as lists show it: `tom/route-selection` is `route-selection`, unless prefixes are on.
@@ -49,7 +48,6 @@ final class ProjectResolver {
                 info.name = manifest.name ?? directory.lastPathComponent
                 info.framework = manifest.framework
                 info.root = path
-                info.hasVercel = FileManager.default.fileExists(atPath: path + "/.vercel/project.json")
                 foundManifest = true
             }
             if gitHeadPath == nil, let git = Self.gitHead(in: path) {

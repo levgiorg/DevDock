@@ -2,7 +2,7 @@
 
 import { Fragment, type ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import styles from './landing.module.css'
-import { AMBER, BackIcon, Chevron, ClaudeIcon, CodexIcon, Colon, ContainerIcon, DotGrid, OpenIcon, PauseIcon, PlayIcon, ServiceIcon, VercelIcon } from './icons'
+import { AMBER, BackIcon, Chevron, ClaudeIcon, CodexIcon, Colon, ContainerIcon, DotGrid, OpenIcon, PauseIcon, PlayIcon, ServiceIcon } from './icons'
 import { type AppLanguageCode, type Localizer, localizer } from './languages'
 import { GET_IT, TERMINAL } from './sections'
 import {
@@ -138,7 +138,7 @@ export function useDemo(section: number) {
       if (s.container && !running.includes(s.port)) return {
         ...s, stopped: true, status: 'idle', memory: 0, cpu: 0, spark: '',
         processes: s.processes.map(p => ({ ...p, memory: 0, cpu: 0 })),
-        lines: () => ({ context: 'Stopped · start container to serve this port', running: 'Stopped' }),
+        lines: () => ({ context: 'Stopped', running: 'Stopped' }),
       }
       return paused.includes(s.port) ? pausedServer(s) : s
     }),
@@ -492,6 +492,7 @@ function ListView({ demo, l }: { demo: Demo; l: Localizer }) {
                     </span>
                   </span>
                 </span>
+                <span className={styles.rowActivity}>
                 <svg className={styles.rowSpark} width="40" height="18" viewBox="0 0 44 18" aria-hidden>
                   <path
                     d={s.spark}
@@ -543,6 +544,7 @@ function ListView({ demo, l }: { demo: Demo; l: Localizer }) {
                     </button>
                   </span>
                 )}
+                </span>
                 <span className={styles.rowMemory} style={{ color: s.status === 'amber' ? AMBER : undefined }}>
                   {formatMemory(s.memory)}
                 </span>
@@ -953,12 +955,6 @@ function DetailView({ demo, server, l }: { demo: Demo; server: Server; l: Locali
         <button type="button" className={styles.primaryAction} onClick={() => trigger('open')}>
           {flash === 'open' ? 'Opened in your browser' : l.format('Open localhost:%@', server.port)}
         </button>
-        {!server.container && (
-          <button type="button" className={styles.secondaryAction} onClick={() => trigger('preview')}>
-            <VercelIcon fill="rgb(235 235 245 / 75%)" width={11} height={10} />
-            {flash === 'preview' ? 'Opened' : l.text('Preview')}
-          </button>
-        )}
         <button type="button" className={styles.moreAction} aria-label="More">
           <span />
           <span />

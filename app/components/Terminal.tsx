@@ -117,7 +117,7 @@ function Line({
 }
 
 const blank = (key: string) => <Line key={key} />
-// Geist Mono has no braille, so fallback glyphs are pinned to exactly one column each.
+// Fallback braille glyphs are pinned to exactly one terminal column each.
 const Cells = ({ text }: { text: string }) => (
   <>
     {Array.from(text, (char, index) => (

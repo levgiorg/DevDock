@@ -140,13 +140,6 @@ export function PaneIcon() {
   )
 }
 
-export function VercelIcon({ fill = '#FFFFFF', width = 12, height = 11 }: { fill?: string; width?: number; height?: number }) {
-  return (
-    <svg width={width} height={height} viewBox="0 0 12 11" aria-hidden style={{ flexShrink: 0 }}>
-      <path d="M6 0.5 11.5 10.5H0.5Z" fill={fill} />
-    </svg>
-  )
-}
 
 export function OpenIcon({ color = '#F5F5F7' }: { color?: string }) {
   return (

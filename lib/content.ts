@@ -120,8 +120,7 @@ export function guideMarkdown(guide: Guide) {
 }
 
 // The app version, read from the Mac app's Info.plist by next.config.js at build time.
-// Reading the plist here would make Vercel trace it into the deployment, but
-// .vercelignore leaves DevDock/ out, so the deploy would fail.
+// The native source directory is optional when hosting the website.
 export function appVersion() {
   return process.env.APP_VERSION || undefined
 }

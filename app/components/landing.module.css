@@ -3,7 +3,7 @@
 .landing {
   background-color: #0b0d12;
   color: #ffffff;
-  font-family: 'Geist', system-ui, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -176,7 +176,7 @@
 }
 
 .mono {
-  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
 }
 
 .t1 {
@@ -473,7 +473,7 @@
   min-height: 0;
   overflow: hidden;
   padding: 10px 12px 12px;
-  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
   font-size: 11px;
   line-height: 15px;
   white-space: pre;
@@ -710,7 +710,7 @@
 }
 
 .inlineMono {
-  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
 }
 
 .closing {
@@ -776,7 +776,7 @@
 }
 
 .portLabelPort {
-  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
   font-weight: 500;
   color: #f5f5f7;
 }
@@ -834,7 +834,7 @@
 }
 
 .githubCount {
-  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
   font-weight: 400;
   color: #ffffff8c;
 }
@@ -881,7 +881,7 @@
 }
 
 .listDetail {
-  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
   color: #ffffff73;
 }
 
@@ -902,7 +902,7 @@
   border: 0.5px solid #ffffff24;
   box-shadow: #00000099 0 0 0 0.5px, #0000008c 0 24px 64px;
   color: #f5f5f7;
-  font-family: 'Geist', system-ui, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 13px;
   line-height: 16px;
   font-feature-settings: 'tnum';
@@ -953,7 +953,7 @@
 }
 
 .popBig {
-  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
   font-size: 28px;
   line-height: 32px;
   font-weight: 500;
@@ -963,7 +963,7 @@
 .popUnit {
   align-self: flex-end;
   padding-bottom: 4px;
-  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
   color: #ebebf566;
 }
 
@@ -1056,7 +1056,7 @@
 
 .memoryLegend i[data-servers] { height: 8px; background: #f5f5f7f2; }
 .memoryLegend i[data-free] { background: #ffffff0d; }
-.memoryLegend b { font: inherit; font-family: 'Geist Mono', monospace; color: #ebebf566; }
+.memoryLegend b { font: inherit; font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace; color: #ebebf566; }
 
 .popSection {
   border-top: 0.5px solid #ffffff14;
@@ -1093,7 +1093,7 @@
 }
 
 .serverGroupMemory {
-  font-family: var(--font-geist-mono), monospace;
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
   white-space: nowrap;
   color: rgb(235 235 245 / 40%);
 }
@@ -1142,6 +1142,16 @@
   opacity: 0.55;
 }
 
+.rowActivity {
+  position: relative;
+  width: 70px;
+  height: 22px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .rowSpark {
   flex-shrink: 0;
 }
@@ -1162,7 +1172,7 @@
 .rowPort {
   width: 49px;
   flex-shrink: 0;
-  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
   font-weight: 500;
 }
 
@@ -1210,6 +1220,8 @@
 }
 
 .rowActions {
+  position: absolute;
+  inset-inline-end: 0;
   display: none;
   gap: 2px;
   flex-shrink: 0;
@@ -1241,7 +1253,7 @@
   width: 64px;
   flex-shrink: 0;
   text-align: end;
-  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
   color: #f5f5f7d9;
 }
 
@@ -1387,7 +1399,7 @@
   flex-direction: column;
   align-items: flex-end;
   justify-content: space-between;
-  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
   font-size: 11px;
   line-height: 14px;
   color: #ebebf566;
@@ -1491,7 +1503,7 @@
 }
 
 .chipCount {
-  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
   font-size: 11px;
   line-height: 14px;
   font-weight: 500;

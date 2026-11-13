@@ -16,7 +16,6 @@ enum Usage {
         case autoCleanUp = "auto-clean-up"
         case memoryAlert = "memory-alert"
         case resumeSession = "resume-session"
-        case vercelPreview = "vercel-preview"
         case pullRequest = "pull-request"
     }
 

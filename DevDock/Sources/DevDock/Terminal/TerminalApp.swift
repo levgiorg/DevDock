@@ -339,10 +339,6 @@ final class TerminalApp {
         let github = monitor.github.result(for: server)
         let root = server.cwdExists ? server.project.root ?? server.cwd : nil
         var items = [ServerAction(label: "Open localhost:\(server.port)", key: "o") { [unowned self] in openInBrowser(server) }]
-        if let preview = github?.preview {
-            let label = preview.state == .building ? "Vercel preview · building" : preview.state == .failed ? "Vercel preview · failed" : "Vercel preview"
-            items.append(ServerAction(label: label, key: "v") { NSWorkspace.shared.open(preview.url) })
-        }
         if let pr = github?.pullRequest {
             items.append(ServerAction(label: "Pull request #\(pr.number)", key: "u") { NSWorkspace.shared.open(pr.url) })
         }
@@ -1245,7 +1241,7 @@ final class TerminalApp {
         let groups: [(String, [(String, String)])] = [
             ("Servers", [("↑ ↓  j k", "Select"), ("⏎", "Details"), ("space", "Actions"), ("c", "Clean up"),
                          ("t", "CPU for servers or the whole Mac")]),
-            ("Actions", [("o", "Open in browser"), ("v", "Vercel preview"), ("u", "Pull request"), ("a", "Resume agent session"),
+            ("Actions", [("o", "Open in browser"), ("u", "Pull request"), ("a", "Resume agent session"),
                          ("r", "Restart"), ("z", "Pause or resume"), ("s", "Stop"), ("e", "Open in editor"), ("f", "Reveal in Finder"),
                          ("y", "Copy URL"), ("Y", "Copy command")]),
             ("Clean up", [("space", "Select or deselect"), ("a", "Select all"), ("⏎", "Stop selected"), ("esc", "Cancel")]),

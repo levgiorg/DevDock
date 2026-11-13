@@ -70,13 +70,18 @@ final class ServerMonitor: ObservableObject {
     /// Servers we've already acted on in Clean up (notified or auto-stopped).
     private var handledCleanUps = Set<String>()
 
-    init() {
+    init(initialServers: [Server] = []) {
         let defaults = UserDefaults.standard
         if let saved = defaults.array(forKey: "allowlist") as? [String] { allowlist = Set(saved) }
         let min = defaults.integer(forKey: "minPort")
         let max = defaults.integer(forKey: "maxPort")
         if (1...65535).contains(min) { minPort = min }
         if (minPort...65535).contains(max) { maxPort = max }
+        servers = initialServers
+        hasScanned = !initialServers.isEmpty
+        for port in initialServers.map(\.port).sorted() where portColorIndices[port] == nil {
+            portColorIndices[port] = portColorIndices.count
+        }
     }
 
     // MARK: - Preferences

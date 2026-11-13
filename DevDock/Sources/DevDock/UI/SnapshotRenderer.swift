@@ -147,9 +147,9 @@ enum SnapshotRenderer {
 
     /// AppKit-backed controls (toggles, pickers, forms) don't draw in
     /// ImageRenderer, so render them in a real off-screen window instead.
-    static func renderWindow<V: View>(_ view: V, size: CGSize, to url: URL) {
+    static func renderWindow<V: View>(_ view: V, size: CGSize, to url: URL, styleMask: NSWindow.StyleMask = [.titled, .fullSizeContentView]) {
         let host = NSHostingView(rootView: LocalizedView { view })
-        let window = NSWindow(contentRect: CGRect(origin: .zero, size: size), styleMask: [.titled, .fullSizeContentView], backing: .buffered, defer: false)
+        let window = NSWindow(contentRect: CGRect(origin: .zero, size: size), styleMask: styleMask, backing: .buffered, defer: false)
         window.appearance = NSApp.effectiveAppearance
         window.contentView = host
         window.setFrameOrigin(CGPoint(x: -10_000, y: -10_000))

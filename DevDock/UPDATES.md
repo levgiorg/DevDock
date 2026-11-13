@@ -2,7 +2,7 @@
 
 DevDock local source builds have no update feed by default. Automatic checks and downloads are off. Configured Sparkle builds require an HTTPS feed, Ed25519 public key, signed feed and update archive, and signature verification before extraction. Sparkle is pinned in Package.resolved.
 
-Publishing a source update does not authorize deployment or notarization uploads. The owner separately authorized recreating the public repository and preparing a macOS/Linux release. The workflow is manual-only and targets the production environment. Configure required environment reviewers in GitHub before any future use; local source changes cannot enforce repository-side reviewer settings.
+Publishing a source update does not authorize deployment or notarization uploads. The owner separately authorized recreating the public repository and preparing a macOS/Linux release. The release-candidate workflow is manual-only. Configure appropriate repository release protections before future publication; local source changes cannot enforce repository-side reviewer settings.
 
 ## Development builds
 
@@ -18,7 +18,7 @@ See [release workflow](../.github/workflows/release.yml) and [release guide](../
 
 A release requires a Developer ID Application identity, hardened runtime, HTTPS signed feed, Ed25519 key, numeric version/build metadata and notarization credentials. `release.sh` refuses ad-hoc signing and missing notarization. Its notarization steps upload artifacts to Apple and must only be run after explicit authorization.
 
-The manual GitHub workflow requires all signing secrets, notary credentials, Sparkle key material and Vercel deployment credentials. It uses pinned action commits and read-only repository permissions, runs checks before publishing and refuses missing credentials. No ad-hoc fallback is published. Sparkle helpers are signed from the inside out; `codesign --deep` is used for verification only.
+The manual release-candidate workflow requires Apple signing/notary credentials only when notarization is explicitly selected. It pins Actions by commit, verifies successful CI for the exact source commit and creates a draft for owner review. Normal publication requires Developer ID signing and notarization; the owner separately approved the explicitly unnotarized v2.8.0-beta.1 experimental prerelease. The signed updater script additionally requires Sparkle key material. No website deployment workflow is configured. Sparkle helpers are signed from the inside out; `codesign --deep` is used for verification only.
 
 Before distribution, verify Developer ID identity, hardened runtime, entitlements, notarization acceptance, stapled tickets, DMG integrity, signed feed/archive and a quarantined clean-machine launch. These release gates were not exercised by the local audit. DevDock has its own bundle identity and requires independently managed feed and signing keys.
 

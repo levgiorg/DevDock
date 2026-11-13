@@ -19,7 +19,7 @@
 - **Stop and restart.** Stop sends SIGTERM to the verified listening process, then SIGKILL after a short delay. Restart reruns the original command in the same folder.
 - **Pause and resume.** Pause freezes the verified listening process with SIGSTOP: it keeps its port and memory but uses no CPU, and requests wait until you resume it with SIGCONT. Pause multiple picks several at once, leaving out protected databases. Clean up doesn’t suggest or automatically stop paused servers. If you started the server itself in a terminal, without a launcher like `npm run dev`, the shell reports it as suspended; after resuming, run `fg` there to get Ctrl-C back.
 - **Containers.** Ports published by Docker Desktop, OrbStack, Colima and Rancher Desktop containers are grouped below native servers, one group per compose project, with the runtime, the compose folder’s git branch and the group’s total memory. Each row shows the service with its icon, the image, and the container’s memory and CPU. Stop, Restart and Pause act on the container through the runtime’s Docker Engine socket (like `docker stop`), never on the runtime itself, and Stop all stops a whole group. Clean up only lists a container when it leaks, and database images are protected. Turn it off in Settings → Integrations.
-- **Previews and pull requests (optional).** A Vercel preview button and the branch’s pull request, through the GitHub CLI you’re already signed in to.
+- **Pull requests (optional).** Show a branch’s pull request through the GitHub CLI you’re already signed in to.
 - **Terminal UI.** `wtp` shows the same servers, details and Clean up in your terminal. `wtp list --json` prints them as JSON for scripts and coding agents.
 - **Global shortcut.** ⌥⌘P opens the popover.
 The app, terminal and website use English. User-supplied project names, paths and branches retain their original Unicode text.
@@ -56,7 +56,7 @@ Frameworks it recognizes include Next.js, Nuxt, Remix, Astro, SvelteKit, Vite, E
 
 ## Privacy
 
-Telemetry is disabled in this build. The website has no analytics or automatic GitHub star request. Docker discovery uses only known local Unix sockets. GitHub preview and pull request lookups require opt-in. Automatic update checks and downloads default to off. External links open when you select them.
+Telemetry is disabled in this build. The website has no analytics or automatic GitHub star request. Docker discovery uses only known local Unix sockets. GitHub pull request lookups require opt-in. Automatic update checks and downloads default to off. External links open when you select them.
 
 ## FAQ
 

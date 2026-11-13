@@ -2,12 +2,12 @@
 // builds it into public/; nothing else should publish a download.
 import { closeSync, existsSync, openSync, readFileSync, readSync, statSync } from 'node:fs'
 
-const production = process.env.VERCEL_ENV === 'production' || process.env.VERCEL_TARGET_ENV === 'production'
+const production = process.env.REQUIRE_DOWNLOAD === '1'
 if (!production) process.exit(0)
 
 const fail = (message) => {
   console.error(`check-download: ${message}`)
-  console.error('Deploy production through .github/workflows/deploy.yml, which builds the app first.')
+  console.error('Build and verify the native app before packaging its download.')
   process.exit(1)
 }
 

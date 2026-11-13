@@ -77,7 +77,7 @@ struct ServersView: View {
     private var visibleServers: [Server] { sections.flatMap(\.servers) }
 
     private var pausableServers: [Server] {
-        monitor.servers.filter { !$0.isProtected && !$0.isPaused }
+        monitor.servers.filter { !$0.isProtected && !$0.isPaused && $0.container?.isRunning != false }
     }
 
     private var selectedServers: [Server] {
@@ -465,7 +465,7 @@ struct ServerRow: View {
     var selecting: RowSelection?
     var onHover: (Bool) -> Void = { _ in }
     let open: () -> Void
-    @State private var isHovered = false
+    @State var isHovered = false
 
     var body: some View {
         let status = monitor.status(of: server)
@@ -497,6 +497,7 @@ struct ServerRow: View {
                     context(status: status)
                 }
             }
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
             .padding(.trailing, 10)
 
             Spacer(minLength: 0)
@@ -521,13 +522,16 @@ struct ServerRow: View {
                     Sparkline(values: server.history.map { Double($0.memory) },
                               color: attention ? Theme.amber : Theme.text1.opacity(0.7),
                               lineWidth: attention ? 1.5 : 1.25)
+                        .frame(width: 40, height: 18)
                 }
             }
-            .frame(width: isHovered && selecting == nil ? 70 : 40, height: 18)
+            .frame(width: 70, height: 18, alignment: .trailing)
 
             Text(Format.bytesString(server.memory))
                 .font(Theme.mono)
                 .foregroundStyle(attention ? Theme.amber : Theme.text1.opacity(0.85))
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
                 .frame(width: 64, alignment: .trailing)
         }
         .padding(.horizontal, 10)
@@ -552,19 +556,14 @@ struct ServerRow: View {
             HStack(spacing: 5) {
                 if let agent = server.agent { AgentGlyph(kind: agent.kind, size: 10) }
                 if let container = server.container {
-                    // Like native rows, only the image truncates; the time always shows.
                     ServiceGlyph(service: container.service)
-                    HStack(spacing: 3) {
-                        Text(container.shortImage)
-                            .lineLimit(1).truncationMode(.tail).help(container.image)
-                        if !contextText.isEmpty { Text("· " + contextText).fixedSize() }
-                    }
+                    Text(server.controlWarning ?? (container.isRunning ? [container.shortImage, contextText] : [contextText, container.shortImage]).filter { !$0.isEmpty }.joined(separator: " · "))
+                        .lineLimit(1).truncationMode(.tail)
+                        .help([container.image, contextText].filter { !$0.isEmpty }.joined(separator: " · "))
                 } else if server.cwdExists, server.project.branch != nil {
-                    HStack(spacing: 3) {
-                        Text(server.project.name.replacingOccurrences(of: "-", with: " "))
-                            .lineLimit(1).truncationMode(.tail).help(server.project.name)
-                        Text("· " + contextText).fixedSize()
-                    }
+                    Text([server.project.name.replacingOccurrences(of: "-", with: " "), contextText].filter { !$0.isEmpty }.joined(separator: " · "))
+                        .lineLimit(1).truncationMode(.tail)
+                        .help(server.project.name + " · " + contextText)
                 } else {
                     Text(contextText).lineLimit(1)
                 }
@@ -578,7 +577,7 @@ struct ServerRow: View {
     private func attentionText(_ text: String) -> some View {
         HStack(spacing: 5) {
             if let container = server.container { ServiceGlyph(service: container.service, color: Theme.amber) }
-            Text(text)
+            Text(text).lineLimit(1).truncationMode(.tail).help(text)
         }
         .font(Theme.caption)
         .foregroundStyle(Theme.amber)
@@ -587,7 +586,7 @@ struct ServerRow: View {
     /// Uptime or idle time, prefixed with the location when there's no branch.
     private var contextText: String {
         if let warning = server.controlWarning { return warning }
-        if server.container?.isRunning == false { return "Stopped · start container to serve this port" }
+        if server.container?.isRunning == false { return "Stopped" }
         if !server.cwdExists, !server.isPaused { return L10n.format("Worktree deleted · idle %@", L10n.duration(server.idleFor, short: true)) }
         let time = server.isPaused
             ? L10n.text("paused")
@@ -798,6 +797,7 @@ struct MemoryLegend: View {
             Text(label).font(Theme.caption).foregroundStyle(Theme.text2)
             Text(value).font(Theme.monoCaption).foregroundStyle(Theme.text3)
         }
-        .fixedSize()
+        .lineLimit(1)
+        .minimumScaleFactor(0.8)
     }
 }

@@ -17,7 +17,7 @@ function markdownPath(pathname: string, accept: string) {
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Middleware runs before Vercel's cache, so HTML and Markdown can share a URL.
+  // Routing runs before page caching, so HTML and Markdown can share a URL.
   const markdown = markdownPath(pathname, request.headers.get('accept') ?? '')
   return markdown ? NextResponse.rewrite(new URL(markdown, request.url)) : NextResponse.next()
 }

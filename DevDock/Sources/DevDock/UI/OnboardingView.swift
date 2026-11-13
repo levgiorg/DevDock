@@ -31,7 +31,7 @@ struct DotMatrixView: View {
 }
 
 enum OnboardingStep: Int, CaseIterable {
-    case welcome, leaks, tools, vercel, terminal, usage, done
+    case welcome, leaks, tools, terminal, usage, done
 }
 
 struct OnboardingView: View {
@@ -45,7 +45,6 @@ struct OnboardingView: View {
     var close: () -> Void = {}
 
     @AppStorage(Preferences.onboarded) private var onboarded = false
-    @AppStorage(Preferences.vercelPreviews) private var previews = false
     @AppStorage(Preferences.usageAsked) private var usageAsked = false
     @AppStorage(Preferences.announcedTUI) private var announcedTUI = false
     @AppStorage(Preferences.thresholdGB) private var thresholdGB = 2.0
@@ -107,7 +106,6 @@ struct OnboardingView: View {
         case .welcome: return "DevDock"
         case .leaks: return L10n.text("Stay ahead of leaks")
         case .tools: return L10n.text("Your tools, at a glance.")
-        case .vercel: return L10n.text("Vercel previews")
         case .terminal: return L10n.text("DevDock Terminal")
         case .usage: return L10n.text("Your privacy")
         case .done: return L10n.text("You’re set")
@@ -119,7 +117,6 @@ struct OnboardingView: View {
         case .welcome: return L10n.text("Every dev server on your Mac, in the menu bar. What it is, what branch it’s on, and what it’s costing you.")
         case .leaks: return L10n.text("DevDock warns you when a server starts eating memory. Nothing about your servers leaves your Mac.")
         case .tools: return L10n.text("DevDock reads local session files and process info to put your servers in context.")
-        case .vercel: return L10n.text("See the preview deployment for whatever branch each server is running. Optional.")
         case .terminal: return L10n.text("Type wtp in any terminal to browse, open and stop your servers, with the same details and Clean up. Optional.")
         case .usage: return L10n.text("Telemetry is disabled. Local discovery stays on this Mac; optional GitHub lookups and update checks are controlled in Settings.")
         case .done: return L10n.text("DevDock is ready in your menu bar. Press ⌥⌘P any time to open it.")
@@ -175,14 +172,6 @@ struct OnboardingView: View {
                         OnboardingConfirmation(state: status.tools[tool] ?? .loading(L10n.text("Checking…")), monospaced: true)
                     }
                 }
-            }
-        case .vercel:
-            OnboardingCard {
-                OnboardingRow(title: L10n.text("Show preview buttons"),
-                              caption: GitHubLookup.isAvailable ? L10n.text("Uses Vercel’s GitHub deployments through gh") : L10n.text("Needs the GitHub CLI (gh)")) {
-                    Toggle("", isOn: $previews).labelsHidden().toggleStyle(.switch)
-                }
-                .disabled(!GitHubLookup.isAvailable)
             }
         case .terminal:
             VStack(spacing: 18) {
@@ -289,10 +278,6 @@ struct OnboardingView: View {
         switch step {
         case .welcome:
             Button(L10n.text("Get started")) { go(.leaks) }.buttonStyle(PillButtonStyle(kind: .primary)).keyboardShortcut(.defaultAction)
-        case .vercel:
-            Button(L10n.text("Back")) { go(.tools) }.buttonStyle(PillButtonStyle())
-            Button(L10n.text("Skip")) { previews = false; go(.terminal) }.buttonStyle(PillButtonStyle())
-            Button(L10n.text("Continue")) { go(.terminal) }.buttonStyle(PillButtonStyle(kind: .primary)).keyboardShortcut(.defaultAction)
         case .usage where usageOnly:
             Button(L10n.text("Done")) { finish() }.buttonStyle(PillButtonStyle(kind: .primary)).keyboardShortcut(.defaultAction)
         case .done:
@@ -321,7 +306,6 @@ struct OnboardingView: View {
         case .welcome: heroGlyph = .colon
         case .leaks: heroGlyph = .leak
         case .tools: heroGlyph = .prompt
-        case .vercel: heroGlyph = .triangle
         case .terminal: heroGlyph = .cursor
         case .usage: heroGlyph = .bars
         case .done:

@@ -23,10 +23,10 @@ Palette: midnight `#101827`, blue `#4B8DFF`, teal `#5AE0CA`, white `#F4F7FB`. Th
 
 The three concept boards, final app-icon artwork and GitHub banner were created with the built-in `image_gen` tool. [Exact prompts](prompts.json) are preserved. `concepts/01-midnight.png`, `02-amber.png` and `03-monochrome.png` preserve the palette comparison requested by the user.
 
-The generated transparent raster wordmark had visible edge artifacts and was discarded. The final wordmarks are clean SVG outlines, authored from the approved shape and bundled Geist Medium font, with HarfBuzz shaping. No external font service, JavaScript or tracking is embedded in the SVGs. The same vector contours generate the AppKit paths and website component.
+The generated transparent raster wordmark had visible edge artifacts and was discarded. The final wordmarks are clean SVG outlines, preserved as outlined artwork from the approved design. No external font service, JavaScript or tracking is embedded in the SVGs. The same vector contours generate the AppKit paths and website component. The application and website use system fonts and bundle no font software.
 
-`build-vectors.py` authors those new vector assets. `render-assets.mjs` renders them to transparent PNG with Playwright. The app-icon master is converted to standard icon sizes with macOS `sips` and `iconutil`; it is not cropped or creatively retouched by a script. Original generated files remain preserved.
+`build-vectors.py` regenerates the mark assets from the approved contours; the wordmark outlines remain frozen artwork. `render-assets.mjs` renders them to transparent PNG with Playwright. The app-icon master is converted to standard icon sizes with macOS `sips` and `iconutil`; it is not cropped or creatively retouched by a script. Original generated files remain preserved.
 
 The app displays **DevDock**, has bundle identity `com.devdock.app` and URL scheme `devdock`, and builds as `DevDock/.build/DevDock.app`. The Swift target and executable are DevDock; `wtp` remains the optional terminal alias. Required copyright and third-party license notices are retained.
 
-Brand assets are included in the private repository. Built DMGs remain ignored local artifacts; publishing releases or deploying the site requires separate approval.
+Brand assets are included in the source repository. Built DMGs remain ignored local artifacts; publishing releases or deploying the site requires separate approval.

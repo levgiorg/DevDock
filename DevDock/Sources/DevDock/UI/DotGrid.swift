@@ -120,7 +120,7 @@ enum MenuBarIcon {
         if glyph == .colon || glyph == .alert { return brandImage(count: count, alert: glyph == .alert) }
         let height: CGFloat = 18
         let gridSize: CGFloat = 16
-        let font = FontLoader.nsFont("GeistMono-Medium", size: 13)
+        let font = NSFont.monospacedSystemFont(ofSize: 13, weight: .medium)
         let countText = count.map { String($0) }
         let textWidth = countText.map { ($0 as NSString).size(withAttributes: [.font: font]).width } ?? 0
         let width = gridSize + (countText == nil ? 0 : 5 + ceil(textWidth))
@@ -167,7 +167,7 @@ enum MenuBarIcon {
         return image
     }
     private static func brandImage(count: Int?, alert: Bool) -> NSImage {
-        let font = FontLoader.nsFont("GeistMono-Medium", size: 13)
+        let font = NSFont.monospacedSystemFont(ofSize: 13, weight: .medium)
         let text = count.map(String.init)
         let textWidth = text.map { ceil(($0 as NSString).size(withAttributes: [.font: font]).width) } ?? 0
         let image = NSImage(size: NSSize(width: 20 + (text == nil ? 0 : 5 + textWidth), height: 18), flipped: true) { _ in
