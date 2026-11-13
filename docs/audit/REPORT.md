@@ -1,6 +1,6 @@
 # DevDock security review
 
-Review date: 2026-11-13. Maintainer: George Levis. Repository: `levgiorg/DevDock` (private, standalone). The exported repository starts with fresh Git history. The full earlier source-review worktree and machine-local evidence remain preserved separately on the development host.
+Review date: 2026-11-13. Maintainer: George Levis. Repository: `levgiorg/DevDock` (standalone; subsequently recreated as a public repository). The exported repository starts with fresh Git history. The full earlier source-review worktree and machine-local evidence remain preserved separately on the development host.
 
 No intentional malicious behavior was identified in the reviewed native application, website, scripts or workflows. This is a source review, scanner results, regression tests and controlled integration checks; it is not proof of complete security or a formal audit of every toolchain, operating-system or dependency byte.
 
@@ -24,7 +24,7 @@ No intentional malicious behavior was identified in the reviewed native applicat
 
 The app is not App Sandbox enabled because process inspection and Docker control need broader local access. It requests no root helper, Full Disk Access or Accessibility entitlement. Global hotkeys use Carbon. Login-item registration and notification permission follow user action.
 
-Known local Docker sockets are used only when discovery is enabled. Socket access has substantial daemon authority even though this client restricts its endpoints. Remote TCP/SSH Docker contexts are not followed. Optional GitHub previews/PRs use the user's installed authenticated gh CLI; they default to off. Browser/editor/terminal links require user selection. Feedback opens the private DevDock issue form and sends nothing until the user submits it. No public website or payment destination is configured.
+Known local Docker sockets are used only when discovery is enabled. Socket access has substantial daemon authority even though this client restricts its endpoints. Remote TCP/SSH Docker contexts are not followed. Optional GitHub previews/PRs use the user's installed authenticated gh CLI; they default to off. Browser/editor/terminal links require user selection. Feedback opens the DevDock issue form and sends nothing until the user submits it. No public website or payment destination is configured.
 
 Configured updater-enabled builds may contact their HTTPS signed update feed; local builds have no feed. Public dependency registries and advisory services are contacted by build/audit tooling. No signing secrets or local fixture data are committed. License notices are preserved in LICENSE and THIRD_PARTY_NOTICES.md.
 
@@ -40,3 +40,9 @@ Configured updater-enabled builds may contact their HTTPS signed update feed; lo
 - Zero reported advisories/findings is time-limited evidence, not a guarantee against future vulnerabilities or dependency compromise. Required GitHub production reviewers and release version numbering for the fresh history must be configured before the first separately approved release. The inherited build number must not be downgraded by a new history counter.
 
 See [verification](VERIFICATION.md) for commands, observed results and exclusions. The source inventory hashes this standalone export and excludes ignored build/test data and the inventory itself.
+
+## Public CI and Linux addition
+
+The owner authorized a public standalone repository and release preparation. Linux has an independently implemented Go terminal companion with bounded current-user procfs inspection, read-only native process handling and local Docker lifecycle operations. It does not claim macOS feature parity. CI uses standard public runners, SHA-pinned official Actions, read-only PR tokens, short artifact retention and isolated full-ID/nonce Docker fixtures. Only the draft-release job has contents-write permission. No workflow uses pull_request_target or checks out untrusted PR code with signing secrets. Signing/notary secrets are accessed only by an explicit main-branch release dispatch. Drafts never publish automatically.
+
+No Apple Developer ID or notarization credentials are configured on the development host. An ad-hoc macOS candidate can be prepared for review; public publication requires an explicit exception to the normal signed-release rule and clear unnotarized prerelease labeling. Linux native inspection remains read-only, daemon access remains powerful, and restricted procfs/namespaces can hide services.

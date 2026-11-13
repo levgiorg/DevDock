@@ -35,3 +35,7 @@ python3 scripts/live-integration.py
 ## Not verified
 
 Developer ID signing, notarization/stapling, quarantined downloaded-app launch, signed-update installation, production deployment, Intel/macOS 14, actual alternate Docker daemons, live multi-IP/IPv6 publications, authenticated GitHub preview/PR queries and authenticated agent-session resume. Browser mobile emulation is not physical iPhone/Safari coverage. No release, deployment or notarization upload accompanies the source push.
+
+## Public CI/release preparation checkpoint
+
+The owner subsequently deleted the private remote and authorized recreating `levgiorg/DevDock` publicly. Current local checks pass for the website/native regressions, workflow syntax (Actionlint), shell checks, Go race tests/vet and Go vulnerability audit using Go 1.27.4. Real Linux procfs/listener tests also pass in an isolated non-root, read-only, network-disabled Linux container without access to the developer's Docker daemon socket. The macOS development candidate is version 2.8.0, build 12; its DMG filename explicitly says unnotarized and its checksum verifies. Public GitHub CI and real Linux-host Docker lifecycle results are recorded after the runs finish. No Apple signing/notarization credentials are available, and draft preparation does not constitute approval to publish an unnotarized macOS package.

@@ -5,6 +5,8 @@ export NEXT_TELEMETRY_DISABLED=1
 npm run verify
 swift test --package-path DevDock -j 4
 python3 DevDock/scripts/test-configure-updates.py
-shellcheck DevDock/*.sh scripts/verify.sh
+shellcheck DevDock/*.sh scripts/*.sh
+(cd linux && go test -race ./... && go vet ./...)
+actionlint
 gitleaks git --redact
 git diff --check

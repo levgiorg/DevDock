@@ -29,3 +29,7 @@ playwright-report/
 test-results/
 *.tsbuildinfo
 __pycache__/
+
+# Release staging
+dist/
+linux/devdock

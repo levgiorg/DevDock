@@ -2,7 +2,9 @@
 
 # DevDock
 
-A native macOS menu bar app for local development ports, processes, Git worktrees, coding-agent sessions and Docker containers. Maintained by [George Levis](https://github.com/levgiorg).
+A native macOS menu bar app for local development ports, processes, Git worktrees, coding-agent sessions and Docker containers, with a Linux terminal companion. Maintained by [George Levis](https://github.com/levgiorg).
+
+[![CI](https://github.com/levgiorg/DevDock/actions/workflows/verify.yml/badge.svg)](https://github.com/levgiorg/DevDock/actions/workflows/verify.yml)
 
 [Source and issues](https://github.com/levgiorg/DevDock) · [Security review](docs/audit/REPORT.md) · [Verification](docs/audit/VERIFICATION.md) · [Brand assets](docs/brand/README.md)
 
@@ -36,6 +38,17 @@ swift run --package-path DevDock DevDock --tui list --json
 
 The app can install the `wtp` terminal alias in `~/.local/bin`, without administrator permission or overwriting another command. It never installs a privileged helper.
 
+## Linux terminal build
+
+The Linux terminal companion supports x86-64 and ARM64: current-user TCP listeners, PIDs, executable paths, folders, memory, Git branches/worktrees, and local Docker identification, mappings and confirmed lifecycle actions. Native process inspection is read-only on Linux. A desktop/tray UI, agent attribution and macOS alert features are not included. See [Linux guide](linux/README.md).
+
+```sh
+./scripts/build-linux.sh 2.8.0-beta.1 amd64
+./scripts/build-linux.sh 2.8.0-beta.1 arm64
+```
+
+Release candidates are prepared as a macOS DMG plus Linux tarballs and `SHA256SUMS`. See [release policy and CI](docs/RELEASING.md). Experimental unnotarized macOS packages are explicitly labeled; do not treat them as notarized distribution builds.
+
 ## Website
 
 ```sh
@@ -43,7 +56,7 @@ npm ci --ignore-scripts
 npm run dev
 ```
 
-Open `http://localhost:3000`. The website runs locally; no public DevDock domain or deployment is configured. The download route only serves a locally built DevDock DMG placed in `public/DevDock.dmg`. Set `NEXT_PUBLIC_SITE_URL` before a separately approved deployment. Demo actions are simulated.
+Open `http://localhost:3000`. The source repository is public. The website runs locally; no public DevDock domain or deployment is configured. The download route only serves a locally built DevDock DMG placed in `public/DevDock.dmg`. Set `NEXT_PUBLIC_SITE_URL` before a separately approved deployment. Demo actions are simulated.
 
 ## Verify
 
@@ -54,6 +67,10 @@ python3 scripts/live-integration.py
 ```
 
 The live harness requires local Docker Desktop and mutates only its own uniquely labeled disposable fixtures. It never stops arbitrary user containers or processes. Native UI interaction, test evidence and exclusions are documented in [verification](docs/audit/VERIFICATION.md).
+
+## CI
+
+Every push to `main` and pull request runs website/browser/security checks, native macOS tests/build, and native Linux amd64/arm64 tests, race detection, vet, dependency auditing and real disposable Docker lifecycle fixtures. Actions are pinned by commit; PR jobs have read-only permissions and no signing secrets. Release artifacts expire after seven days in Actions; published release assets are separate. Standard hosted runner compute is free for this public repository; larger runners and separate storage usage can be charged.
 
 ## Security and release controls
 

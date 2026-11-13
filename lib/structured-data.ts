@@ -33,7 +33,7 @@ export function softwareApplication() {
       'Links servers to the Claude Code, Codex, Conductor or Pane session that started them',
       'Memory leak alerts at 2 GB or 500 MB growth in ten minutes',
       'Clean up stops idle servers and servers from deleted git worktrees',
-      'Stops and restarts whole process trees',
+      'Confirms actions against freshly verified listeners and Docker containers',
       'wtp terminal UI and wtp list --json for scripts and agents',
       'Global shortcut ⌥⌘P',
     ],

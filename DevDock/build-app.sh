@@ -7,8 +7,8 @@ EXECUTABLE_NAME="DevDock"
 APP_DIR=".build/${APP_NAME}.app"
 CONTENTS_DIR="${APP_DIR}/Contents"
 
-if [[ "${1:-}" != "" && "${1:-}" != "--release" ]]; then
-    echo "Usage: $0 [--release]" >&2
+if [[ "${1:-}" != "" && "${1:-}" != "--release" && "${1:-}" != "--distribution" ]]; then
+    echo "Usage: $0 [--release|--distribution]" >&2
     exit 1
 fi
 export SPARKLE_FEED_URL="${SPARKLE_FEED_URL:-}"
@@ -16,7 +16,7 @@ export SPARKLE_PUBLIC_KEY="${SPARKLE_PUBLIC_KEY:-}"
 export WTP_VERSION="${WTP_VERSION:-}"
 export WTP_BUILD="${WTP_BUILD:-}"
 export REQUIRE_UPDATES="${1:-}"
-if [[ "${1:-}" == "--release" && "${CODE_SIGN_IDENTITY:--}" == "-" ]]; then
+if [[ ( "${1:-}" == "--release" || "${1:-}" == "--distribution" ) && "${CODE_SIGN_IDENTITY:--}" == "-" ]]; then
     echo "Release builds require a Developer ID Application signing identity." >&2
     exit 1
 fi
@@ -70,7 +70,7 @@ for component in "${SPARKLE}/XPCServices/Downloader.xpc" \
 done
 codesign "${SIGN_OPTIONS[@]}" "${APP_DIR}"
 codesign --verify --deep --strict "${APP_DIR}"
-if [[ "${1:-}" == "--release" ]]; then
+if [[ "${1:-}" == "--release" || "${1:-}" == "--distribution" ]]; then
     if ! codesign --display --verbose=2 "${APP_DIR}" 2>&1 | /usr/bin/grep -q '^Authority=Developer ID Application:'; then
         echo "Release builds must be signed with Developer ID Application." >&2
         exit 1

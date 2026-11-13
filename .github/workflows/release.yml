@@ -1,0 +1,175 @@
+name: Prepare release
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag (for example v2.8.0-beta.1)'
+        required: true
+        default: v2.8.0-beta.1
+      build_number:
+        description: 'Monotonically increasing macOS build number (at least 12)'
+        required: true
+        default: '12'
+      notarize:
+        description: 'Use configured Developer ID / Apple notarization secrets'
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  inputs:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      version: ${{ steps.validate.outputs.version }}
+    steps:
+      - name: Validate release inputs
+        id: validate
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+          BUILD_NUMBER: ${{ inputs.build_number }}
+        run: |
+          python3 - <<'PY'
+          import os,re
+          tag=os.environ['RELEASE_TAG'];build=os.environ['BUILD_NUMBER']
+          if not re.fullmatch(r'v[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]+)?',tag):
+              raise SystemExit('Invalid release tag')
+          if not re.fullmatch(r'[0-9]+',build) or int(build)<12:
+              raise SystemExit('Build number must be at least 12 and greater than prior published builds')
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:f.write('version='+tag[1:]+'\n')
+          PY
+  checks:
+    needs: inputs
+    uses: ./.github/workflows/verify.yml
+  linux:
+    needs: [inputs, checks]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-24.04
+            arch: amd64
+          - runner: ubuntu-24.04-arm
+            arch: arm64
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version: '1.27.4'
+          cache: false
+      - name: Package static executable and notices
+        env:
+          RELEASE_VERSION: ${{ needs.inputs.outputs.version }}
+          ARCH: ${{ matrix.arch }}
+        run: ./scripts/build-linux.sh "$RELEASE_VERSION" "$ARCH"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: release-linux-${{ matrix.arch }}
+          path: dist/*.tar.gz
+          if-no-files-found: error
+          retention-days: 7
+  macos:
+    needs: [inputs, checks]
+    runs-on: macos-26
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install signing credentials only when explicitly selected
+        if: inputs.notarize
+        env:
+          DEVELOPER_ID_P12: ${{ secrets.DEVELOPER_ID_P12 }}
+          DEVELOPER_ID_P12_PASSWORD: ${{ secrets.DEVELOPER_ID_P12_PASSWORD }}
+          NOTARY_API_KEY: ${{ secrets.NOTARY_API_KEY }}
+          NOTARY_API_KEY_ID: ${{ secrets.NOTARY_API_KEY_ID }}
+          NOTARY_API_ISSUER_ID: ${{ secrets.NOTARY_API_ISSUER_ID }}
+        run: |
+          set -Eeuo pipefail
+          for name in DEVELOPER_ID_P12 DEVELOPER_ID_P12_PASSWORD NOTARY_API_KEY NOTARY_API_KEY_ID NOTARY_API_ISSUER_ID; do
+            if [[ -z "${!name}" ]]; then echo "::error::Missing signing secret $name"; exit 1; fi
+          done
+          umask 077
+          keychain="$RUNNER_TEMP/devdock-signing.keychain-db"
+          password="$(openssl rand -base64 24)"
+          security create-keychain -p "$password" "$keychain"
+          security set-keychain-settings -lut 21600 "$keychain"
+          security unlock-keychain -p "$password" "$keychain"
+          printf '%s' "$DEVELOPER_ID_P12" | base64 --decode > "$RUNNER_TEMP/devdock-signing.p12"
+          security import "$RUNNER_TEMP/devdock-signing.p12" -k "$keychain" -P "$DEVELOPER_ID_P12_PASSWORD" -T /usr/bin/codesign
+          rm -f "$RUNNER_TEMP/devdock-signing.p12"
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$password" "$keychain" > /dev/null
+          security list-keychains -d user -s "$keychain"
+          identity="$(security find-identity -v -p codesigning "$keychain" | awk '/Developer ID Application/ { print $2; exit }')"
+          test -n "$identity"
+          echo "CODE_SIGN_IDENTITY=$identity" >> "$GITHUB_ENV"
+          printf '%s\n' "$NOTARY_API_KEY" > "$RUNNER_TEMP/devdock-notary.p8"
+      - name: Build and verify macOS disk image
+        env:
+          RELEASE_VERSION: ${{ needs.inputs.outputs.version }}
+          BUILD_NUMBER: ${{ inputs.build_number }}
+          NOTARIZE: ${{ inputs.notarize }}
+          NOTARY_API_KEY_PATH: ${{ runner.temp }}/devdock-notary.p8
+          NOTARY_API_KEY_ID: ${{ secrets.NOTARY_API_KEY_ID }}
+          NOTARY_API_ISSUER_ID: ${{ secrets.NOTARY_API_ISSUER_ID }}
+        run: |
+          mode=development
+          if [[ "$NOTARIZE" == true ]]; then mode=notarized; fi
+          ./scripts/package-macos.sh "$RELEASE_VERSION" "$BUILD_NUMBER" "$mode"
+      - name: Remove temporary signing credentials
+        if: always() && inputs.notarize
+        run: |
+          security delete-keychain "$RUNNER_TEMP/devdock-signing.keychain-db" || true
+          rm -f "$RUNNER_TEMP/devdock-signing.p12" "$RUNNER_TEMP/devdock-notary.p8"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: release-macos-arm64
+          path: dist/*.dmg
+          if-no-files-found: error
+          retention-days: 7
+  draft:
+    needs: [inputs, linux, macos]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          pattern: release-*
+          merge-multiple: true
+          path: dist
+      - name: Checksums and release notes
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+          NOTARIZE: ${{ inputs.notarize }}
+        run: |
+          python3 - <<'PY'
+          import hashlib,os
+          from pathlib import Path
+          files=sorted(Path('dist').glob('*'))
+          if len(files)!=3 or sum(p.suffix=='.dmg' for p in files)!=1:
+              raise SystemExit('Expected exactly one DMG and two Linux tarballs')
+          Path('dist/SHA256SUMS').write_text(''.join(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+p.name+'\n' for p in files))
+          signed=os.environ['NOTARIZE']=='true'
+          notes='''DevDock for macOS and Linux\n\n- macOS: native menu-bar app for Apple Silicon, macOS 14+.\n- Linux: static terminal companion for x86-64 and ARM64. Native inspection is read-only; local Docker discovery and confirmed lifecycle operations are supported. No Linux desktop/tray UI or agent-session attribution yet.\n- Verify downloads against SHA256SUMS. License notices are included.\n\n'''
+          notes+=('The macOS app and DMG are Developer ID signed and notarized.\n' if signed else '**Experimental macOS build: ad-hoc signed, NOT Apple-notarized. Gatekeeper may block it. No automatic updater is configured. Do not disable system-wide security protections. Publishing this unnotarized build requires the owner\'s explicit release-policy exception.**\n')
+          notes+='\nBuilt from '+os.environ['GITHUB_SHA']+'. This workflow creates a draft and never publishes it automatically.\n'
+          Path('release-notes.md').write_text(notes)
+          PY
+      - name: Create draft release for owner review
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          gh release create "$RELEASE_TAG" dist/* --target "$GITHUB_SHA" \
+            --title "DevDock $RELEASE_TAG" --draft --prerelease --notes-file release-notes.md

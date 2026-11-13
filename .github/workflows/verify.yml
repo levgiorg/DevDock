@@ -1,32 +1,102 @@
-name: Verify security and behavior
+name: CI
 on:
-  pull_request:
   push:
-    branches-ignore: [main]
+    branches: [main]
+  pull_request:
   workflow_dispatch:
+  workflow_call:
 permissions:
   contents: read
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
-  verify:
-    runs-on: macos-26
-    timeout-minutes: 30
+  web-security:
+    name: Website and security
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
     env:
-      NEXT_TELEMETRY_DISABLED: 1
+      NEXT_TELEMETRY_DISABLED: '1'
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          fetch-depth: 0
           persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '24'
           cache: npm
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.13'
       - run: npm ci --ignore-scripts
       - run: npm run verify
-      - run: npx playwright install chromium
+      - run: npx playwright install --with-deps chromium
       - run: npm run test:browser
-      - run: swift test --package-path DevDock -j 4
       - run: python3 DevDock/scripts/test-configure-updates.py
-      - run: brew install shellcheck gitleaks
-      - run: shellcheck DevDock/*.sh scripts/verify.sh
+      - name: Audit hash-locked Python build tools
+        run: |
+          python3 -m pip install --disable-pip-version-check pip-audit==2.9.0
+          pip-audit --require-hashes -r DevDock/dmg/requirements.lock
+          pip-audit --require-hashes -r docs/brand/requirements.lock
+      - name: Shell checks
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y shellcheck
+          shellcheck DevDock/*.sh scripts/*.sh
+      - run: ./scripts/install-gitleaks.sh
       - run: gitleaks git --redact
+      - name: Verify formatting
+        run: git diff --check
+  macos:
+    name: macOS native app
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - run: swift test --package-path DevDock -j 2
       - run: ./DevDock/build-app.sh
+      - name: Verify the built application
+        run: |
+          codesign --verify --deep --strict DevDock/.build/DevDock.app
+          test "$(lipo -archs DevDock/.build/DevDock.app/Contents/MacOS/DevDock)" = arm64
+          DevDock/.build/DevDock.app/Contents/MacOS/DevDock --tui --version
+  linux:
+    name: Linux ${{ matrix.arch }}
+    env:
+      GOTELEMETRY: off
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-24.04
+            arch: amd64
+          - runner: ubuntu-24.04-arm
+            arch: arm64
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version: '1.27.4'
+          cache: false
+      - name: Tests, race detector and vet
+        working-directory: linux
+        run: |
+          test -z "$(gofmt -l .)"
+          go test -race -count=1 -v ./...
+          go vet ./...
+      - name: Go vulnerability audit
+        working-directory: linux
+        run: go run golang.org/x/vuln/cmd/govulncheck@v1.9.0 ./...
+      - name: Real Docker lifecycle fixtures
+        run: ./scripts/ci-linux-live.sh
+      - name: Build static Linux release archive
+        env:
+          ARCH: ${{ matrix.arch }}
+        run: ./scripts/build-linux.sh ci "$ARCH"

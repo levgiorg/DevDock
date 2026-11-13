@@ -9,7 +9,7 @@ files = subprocess.check_output(['git', 'ls-files', '--cached', '--others', '--e
 errors = []
 for name in sorted(set(files)):
     p = root / name
-    if not p.is_file() or p.suffix not in {'.swift', '.ts', '.tsx', '.json', '.md', '.mjs', '.py', '.sh', '.strings'}:
+    if not p.is_file() or p.suffix not in {'.swift', '.ts', '.tsx', '.json', '.md', '.mjs', '.py', '.sh', '.strings', '.go', '.yml'}:
         continue
     text = p.read_text(errors='replace')
     if re.search('[\u3400-\u9fff\uf900-\ufaff\u3040-\u30ff]', text):

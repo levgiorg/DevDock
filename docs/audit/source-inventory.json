@@ -1,6 +1,6 @@
 {
-  "scope": "Standalone DevDock source; excludes deleted files, ignored build/test artifacts, Git metadata and this inventory itself.",
-  "file_count": 201,
+  "scope": "Current DevDock source; excludes ignored build/test artifacts, Git metadata and this inventory itself.",
+  "file_count": 213,
   "files": [
     {
       "path": ".conductor/settings.toml",
@@ -10,20 +10,26 @@
     },
     {
       "path": ".github/workflows/deploy.yml",
-      "bytes": 7796,
-      "sha256": "f56e58dcb8c9183635d449f34e38d52dda45fcfed650b7bcd704f18bd5b77979",
+      "bytes": 7753,
+      "sha256": "df988e2f42eb62b3e66e5f855a26277dff81d8289851feebf9443b1e2fdaccd4",
+      "executable": false
+    },
+    {
+      "path": ".github/workflows/release.yml",
+      "bytes": 8009,
+      "sha256": "12d6af914c713a6fded9f4ab9fec80712efff9d7f4cdbc2b13e001522d3ac2fb",
       "executable": false
     },
     {
       "path": ".github/workflows/verify.yml",
-      "bytes": 949,
-      "sha256": "255048a3fad72083c690183a72e5c821a6c5f5da1f516766755f4e941da977c5",
+      "bytes": 3401,
+      "sha256": "2723aea1330f53d62a7204709c417e6ee5030b286e54b787fbb2f5ee1a91d26a",
       "executable": false
     },
     {
       "path": ".gitignore",
-      "bytes": 426,
-      "sha256": "5fbf490d04fcadf0ad014a7311f11c12d01526735e91f94616db4b681d5edf04",
+      "bytes": 465,
+      "sha256": "e627a4c6b626c52903b6c146cbeb65bba652715efabd5284b800d16c46a798f3",
       "executable": false
     },
     {
@@ -346,8 +352,8 @@
     },
     {
       "path": "DevDock/Sources/DevDock/UI/SettingsView.swift",
-      "bytes": 29030,
-      "sha256": "f8494e3c9994be3a4a6eda7022e57d8c8b2dc6eb498ae7954ab57a869ac7accf",
+      "bytes": 28993,
+      "sha256": "6e7787ffea14067277837c1ef5a5552ec3c005ec7fbf26d5f6efe9636bce3659",
       "executable": false
     },
     {
@@ -418,14 +424,14 @@
     },
     {
       "path": "DevDock/UPDATES.md",
-      "bytes": 2665,
-      "sha256": "6c7a23e53a6b8860c8b05bc8588b4f92764d0e3e82deff15ce1d69b6fd50824b",
+      "bytes": 3378,
+      "sha256": "2590b2f76fc733dea7ab12ed34ad5a938a44e4d998e3387d82924dba4856ded5",
       "executable": false
     },
     {
       "path": "DevDock/build-app.sh",
-      "bytes": 3129,
-      "sha256": "4ffbc4ce73f28de43919836d150de9e25efaa2ca3f6361a9e9a6f4f8f9a37335",
+      "bytes": 3244,
+      "sha256": "d851bae5532100fe2fdccbc17cbb1d259ba6fb78d39b74ef4ae93d178bf3a05b",
       "executable": true
     },
     {
@@ -508,8 +514,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 3810,
-      "sha256": "e061d8bf971bdfe9927531b41b03a3f7a67fee124366930d46fa681a70d06971",
+      "bytes": 5332,
+      "sha256": "bd4a2c7ec51b2d6d223b147600f34470bf04b8e5732e08e85ffac10badf5d63f",
       "executable": false
     },
     {
@@ -747,6 +753,12 @@
       "executable": false
     },
     {
+      "path": "docs/RELEASING.md",
+      "bytes": 3707,
+      "sha256": "1a768c07586e32cf1a840cfdb5524fa96e89b74ef3ccc042c848368ce5fb48c4",
+      "executable": false
+    },
+    {
       "path": "docs/audit/PLAN.md",
       "bytes": 614,
       "sha256": "36f04077de03bda3f8d4c68440d44eb2ef36cebb1eb3fff1a8e16d047c764289",
@@ -754,14 +766,14 @@
     },
     {
       "path": "docs/audit/REPORT.md",
-      "bytes": 6669,
-      "sha256": "a2e1fd7d4612847072400fac23b23c582069ded65fc43168456dc4829b3a892b",
+      "bytes": 7851,
+      "sha256": "49a9e51878b4892db8c4ac0e23836fe55a4523690cb3ec15fb3d650c47fe54fb",
       "executable": false
     },
     {
       "path": "docs/audit/VERIFICATION.md",
-      "bytes": 4197,
-      "sha256": "5d09fd847e2a3ca7ab55d24740edb25b1acb9fba7c034046a8356cf135a4d0a7",
+      "bytes": 5063,
+      "sha256": "8c30545c2f4c71a4e47d48b0b9422c63ee8d44e08066d493604105c74751bb08",
       "executable": false
     },
     {
@@ -940,8 +952,44 @@
     },
     {
       "path": "lib/structured-data.ts",
-      "bytes": 3023,
-      "sha256": "10cc09f971f868d12e8442072c7f1c63ed56a5f26a9a94b11a67ac3da19f1e43",
+      "bytes": 3058,
+      "sha256": "9fa086ab6250a61ab45323810b40e9f2f852631df4721cd2c32f89d7462ee931",
+      "executable": false
+    },
+    {
+      "path": "linux/README.md",
+      "bytes": 2321,
+      "sha256": "fbfcaedc6cf9618a3f54ec0d2ac1f13f3f17aca9cf1324d67bf00a7ad409fab0",
+      "executable": false
+    },
+    {
+      "path": "linux/docker.go",
+      "bytes": 7163,
+      "sha256": "3ea6955dbfec596e53349ae8eeb6f37f882b8b8fb5475be13a02bb69c566fef3",
+      "executable": false
+    },
+    {
+      "path": "linux/go.mod",
+      "bytes": 72,
+      "sha256": "1a557f8edbb5847dce5752c3f14e69d0dfb6142af632d1f730f61afbf759f6d7",
+      "executable": false
+    },
+    {
+      "path": "linux/main.go",
+      "bytes": 5348,
+      "sha256": "92e1dfb07e239395bcf6d10fdab66e1e0cbb06d35cefea68dcb2a86dea412163",
+      "executable": false
+    },
+    {
+      "path": "linux/main_test.go",
+      "bytes": 9815,
+      "sha256": "2a4bee08185b76b045e8cdf2af4d1de7f9599bb67ff0395f924a5d92fc620861",
+      "executable": false
+    },
+    {
+      "path": "linux/process.go",
+      "bytes": 7283,
+      "sha256": "2a4bbdf5fbc0c731f23728b4ef646237ebadb6339e5eda755e47de72c5fdc58e",
       "executable": false
     },
     {
@@ -1143,6 +1191,12 @@
       "executable": false
     },
     {
+      "path": "scripts/build-linux.sh",
+      "bytes": 812,
+      "sha256": "918a1de32ebc8f770fa568fe489ec08399512768aae650068a81b26a9ba5f0d8",
+      "executable": true
+    },
+    {
       "path": "scripts/check-download.mjs",
       "bytes": 2002,
       "sha256": "4b4deed22bc5b9319112e621fb34a0d12c4631f835627933dc0cab771a99ef13",
@@ -1155,10 +1209,28 @@
       "executable": false
     },
     {
+      "path": "scripts/ci-linux-live.sh",
+      "bytes": 1316,
+      "sha256": "8972ed308f235af709f3445dfa0ae97d63bdf0a544157b29c2ca4edfef7ce8e1",
+      "executable": true
+    },
+    {
+      "path": "scripts/install-gitleaks.sh",
+      "bytes": 1102,
+      "sha256": "7e744850e9663425e974b32c5ffcd2bf8ae7fb9a7fbe9287eca10155f13f2c4f",
+      "executable": true
+    },
+    {
       "path": "scripts/live-integration.py",
       "bytes": 2499,
       "sha256": "d308e5ca06670a3fa4d15ef74afa39fb0268b22e411ee6ace05d310ab1b90de0",
       "executable": false
+    },
+    {
+      "path": "scripts/package-macos.sh",
+      "bytes": 2075,
+      "sha256": "8c388a588b96cc783424480b8e2d2fbb80df7eff6f843f29104dffeab42a556c",
+      "executable": true
     },
     {
       "path": "scripts/security-native.yml",
@@ -1168,8 +1240,8 @@
     },
     {
       "path": "scripts/security-scan.py",
-      "bytes": 1416,
-      "sha256": "61b4ac1e90050d73e6c9a3cdb584475250a3bf8843289b1913ad548322438e64",
+      "bytes": 1431,
+      "sha256": "0487e94d758a7eaf51a655d75de5318b77bf1be94610c011506e285a4f86fdfa",
       "executable": false
     },
     {
@@ -1186,8 +1258,8 @@
     },
     {
       "path": "scripts/verify.sh",
-      "bytes": 288,
-      "sha256": "bd22c327b7eb2997734d1f7a2e98b70bfd0854535d30ab790b1f6c86ad8ced3e",
+      "bytes": 344,
+      "sha256": "90e7a6288294cf1cf0daf3e57640ea2815e17140aa6062dde02c790b1e1651bf",
       "executable": true
     },
     {

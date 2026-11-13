@@ -2,13 +2,17 @@
 
 DevDock local source builds have no update feed by default. Automatic checks and downloads are off. Configured Sparkle builds require an HTTPS feed, Ed25519 public key, signed feed and update archive, and signature verification before extraction. Sparkle is pinned in Package.resolved.
 
-No release, push, deployment or notarization upload is authorized as part of the audit. The workflow is manual-only and targets the production environment. Configure required environment reviewers in GitHub before any future use; local source changes cannot enforce repository-side reviewer settings.
+Publishing a source update does not authorize deployment or notarization uploads. The owner separately authorized recreating the public repository and preparing a macOS/Linux release. The workflow is manual-only and targets the production environment. Configure required environment reviewers in GitHub before any future use; local source changes cannot enforce repository-side reviewer settings.
 
 ## Development builds
 
 Run `./build-app.sh` with no signing variables to build an ad-hoc development app. macOS library validation cannot load separately ad-hoc-signed Sparkle into a hardened app, so development signing intentionally omits hardened runtime. It adds no library-validation exception entitlement. This is not a notarized or redistributable release. Bundle signatures are still verified.
 
 Build scripts do not automatically source `update-config.env` or execute its contents. Export reviewed public configuration explicitly. `update-config.env.example` describes the variables. Private keys belong in Keychain or an approved secret store, never in a repository.
+
+## GitHub release candidates
+
+See [release workflow](../.github/workflows/release.yml) and [release guide](../docs/RELEASING.md). `--distribution` requires Developer ID signing but allows a standalone notarized DMG without configuring Sparkle. `--release` continues to require the signed updater feed. `scripts/package-macos.sh` prepares either a development DMG or explicitly requested notarized artifact; it never publishes. The workflow produces a draft for review. An unnotarized development DMG requires an explicit owner exception before public prerelease publication; it must never be presented as notarized.
 
 ## Approved releases
 

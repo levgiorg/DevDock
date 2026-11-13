@@ -482,7 +482,7 @@ enum FeedbackLink {
 
     static let repository = "https://github.com/levgiorg/DevDock"
 
-    /// The private DevDock repository; access follows GitHub account permissions.
+    /// The public DevDock source repository.
     static let site = URL(string: "https://github.com/levgiorg/DevDock")!
 
     static func issue(_ kind: Kind) -> URL {
