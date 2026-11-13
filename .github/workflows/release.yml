@@ -44,7 +44,23 @@ jobs:
           PY
   checks:
     needs: inputs
-    uses: ./.github/workflows/verify.yml
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - name: Require successful main-branch CI for this exact commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          status="$(gh api --method GET "repos/$GITHUB_REPOSITORY/actions/workflows/verify.yml/runs" \
+            -f head_sha="$GITHUB_SHA" -f branch=main -f per_page=10 \
+            --jq '[.workflow_runs[] | select(.event == "push" or .event == "workflow_dispatch")][0].conclusion')"
+          if [[ "$status" != success ]]; then
+            echo "::error::Wait for successful CI on this exact main commit before preparing a release."
+            exit 1
+          fi
   linux:
     needs: [inputs, checks]
     runs-on: ${{ matrix.runner }}

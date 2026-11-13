@@ -16,8 +16,8 @@
     },
     {
       "path": ".github/workflows/release.yml",
-      "bytes": 8009,
-      "sha256": "12d6af914c713a6fded9f4ab9fec80712efff9d7f4cdbc2b13e001522d3ac2fb",
+      "bytes": 8694,
+      "sha256": "ecfd0e35300f593d572a1dd8ca9ff5a75cf573da30ddbfc2832fbe0eec6d3f8b",
       "executable": false
     },
     {
@@ -520,8 +520,8 @@
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
-      "bytes": 12072,
-      "sha256": "5abf1ea7da866bc560d1f462cc39558c6e6bc82835ff81376253f91616ad5094",
+      "bytes": 13577,
+      "sha256": "1f6867b9f824047f62a55edd651246e6412919df6b3145fe85afb50486b63d1d",
       "executable": false
     },
     {
@@ -754,8 +754,8 @@
     },
     {
       "path": "docs/RELEASING.md",
-      "bytes": 3707,
-      "sha256": "1a768c07586e32cf1a840cfdb5524fa96e89b74ef3ccc042c848368ce5fb48c4",
+      "bytes": 3774,
+      "sha256": "988d91f20343225c8ebcc4ddc35439742011e9b66be40897f3fb319a399a42b3",
       "executable": false
     },
     {
@@ -1192,8 +1192,8 @@
     },
     {
       "path": "scripts/build-linux.sh",
-      "bytes": 812,
-      "sha256": "918a1de32ebc8f770fa568fe489ec08399512768aae650068a81b26a9ba5f0d8",
+      "bytes": 1229,
+      "sha256": "36e9550fcd69f6a7912f5e2d940381742337bddcb101809625a1427969729681",
       "executable": true
     },
     {

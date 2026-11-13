@@ -18,6 +18,15 @@ mkdir -p "${ROOT}/dist" "${STAGING}/${NAME}"
     CGO_ENABLED=0 GOOS=linux GOARCH="${ARCH}" go build -trimpath -buildvcs=false \
         -ldflags "-s -w -X main.version=${VERSION}" -o "${STAGING}/${NAME}/devdock" .
 )
+if [[ "$(go env GOHOSTOS)" == linux && "$(go env GOHOSTARCH)" == "${ARCH}" ]]; then
+    "${STAGING}/${NAME}/devdock" --version
+    "${STAGING}/${NAME}/devdock" list --docker=false --json > "${STAGING}/smoke.json"
+    python3 - "${STAGING}/smoke.json" <<'PYTHON'
+import json,sys
+with open(sys.argv[1]) as f: data=json.load(f)
+assert isinstance(data['processes'],list) and isinstance(data['containers'],list)
+PYTHON
+fi
 cp LICENSE THIRD_PARTY_NOTICES.md linux/README.md "${STAGING}/${NAME}/"
 tar -czf "${ROOT}/dist/${NAME}.tar.gz" -C "${STAGING}" "${NAME}"
 echo "Built dist/${NAME}.tar.gz"
