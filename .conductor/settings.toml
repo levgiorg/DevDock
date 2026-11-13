@@ -1,0 +1,11 @@
+"$schema" = "https://conductor.build/schemas/settings.repo.schema.json"
+
+[scripts]
+archive = ""
+setup = "cd DevDock && swift build"
+
+[scripts.run.run]
+available_in = "local"
+command = "cd DevDock && swift run"
+default = true
+icon = "play"

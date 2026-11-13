@@ -1,0 +1,3 @@
+# Standalone repository plan
+
+Export the reviewed working tree without build artifacts, local logs, Git ancestry or old remotes. Use DevDock for the Swift module, executable, bundle, website and repository. Point product links to levgiorg/DevDock; remove personal promotion, donation integration and unused payment routes. Retain required license notices and add the current owner's modifications. Run native/web regression checks, build the app, scan the exact export, then create a private standalone repository and push its fresh initial commit. Publishing releases and deployment remain separately controlled.

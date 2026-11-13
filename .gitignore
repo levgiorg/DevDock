@@ -1,0 +1,31 @@
+# Swift
+.build/
+.swiftpm/
+*.xcodeproj
+xcuserdata/
+DerivedData/
+
+# macOS
+.DS_Store
+
+# Node
+node_modules/
+.next/
+
+# Conductor
+.context/
+.vercel
+.env*
+
+# Built by CI for each production deploy. Never commit these.
+public/DevDock.dmg
+public/updates/
+
+# Local release configuration (the private update key belongs in Keychain)
+DevDock/update-config.env
+
+# Test artifacts
+playwright-report/
+test-results/
+*.tsbuildinfo
+__pycache__/

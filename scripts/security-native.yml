@@ -1,0 +1,22 @@
+rules:
+  - id: native-privileged-shell
+    languages: [generic]
+    severity: ERROR
+    message: Native sources must not invoke privileged shell/AppleScript APIs.
+    pattern-regex: 'NSAppleScript|with\s+administrator\s+privileges|AuthorizationExecuteWithPrivileges'
+    paths:
+      include: ['DevDock/Sources/**']
+  - id: native-shell-source-reconstruction
+    languages: [generic]
+    severity: ERROR
+    message: Native subprocess arguments must not reconstruct login-shell source.
+    pattern-regex: 'process\.arguments\s*=\s*\[\s*"-(?:lc|c)"'
+    paths:
+      include: ['DevDock/Sources/**']
+  - id: native-unbounded-c-string-api
+    languages: [generic]
+    severity: ERROR
+    message: Review unbounded C command/string primitives.
+    pattern-regex: '(?<![.\w])(?:popen|strcpy|strcat|gets|system)\s*\('
+    paths:
+      include: ['DevDock/Sources/**']

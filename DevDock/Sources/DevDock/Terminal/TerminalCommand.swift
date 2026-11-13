@@ -1,0 +1,220 @@
+import Darwin
+import Foundation
+
+/// `wtp`, the command-line side of the app. The app's executable runs it when
+/// invoked through a symlink named `wtp`, or with `--tui`.
+enum TerminalCommand {
+    static let appIdentifier = "com.devdock.app"
+
+    static var isRequested: Bool {
+        let name = CommandLine.arguments.first.map { ($0 as NSString).lastPathComponent }
+        return name == "wtp" || CommandLine.arguments.dropFirst().first == "--tui"
+    }
+
+    @MainActor static func run() -> Never {
+        var arguments = Array(CommandLine.arguments.dropFirst())
+        if arguments.first == "--tui" { arguments.removeFirst() }
+        // Share the menu bar app's settings: port range, processes, thresholds, integrations.
+        if Bundle.main.bundleIdentifier != appIdentifier {
+            UserDefaults.standard.addSuite(named: appIdentifier)
+        }
+        Preferences.register()
+
+        switch arguments.first {
+        case nil:
+            guard isatty(STDIN_FILENO) == 1, isatty(STDOUT_FILENO) == 1 else { list(json: false) }
+            TerminalApp.run()
+        case "language":
+            configureLanguage(Array(arguments.dropFirst()))
+        case "list", "ls":
+            list(json: arguments.contains("--json"))
+        case "--json":
+            list(json: true)
+        case "help", "-h", "--help":
+            print(usage)
+            exit(0)
+        case "version", "-v", "--version":
+            print("wtp \(version)")
+            exit(0)
+        default:
+            FileHandle.standardError.write(Data("wtp: unknown command ‘\(arguments[0])’\n\n\(usage)\n".utf8))
+            exit(64)
+        }
+    }
+
+    private static let usage = """
+    Every dev server on your Mac, in the terminal.
+
+    Usage:
+      wtp               Browse, open and stop servers
+      wtp list          Print servers and exit
+      wtp list --json   Print servers as JSON
+      wtp --version     Print the version
+      wtp language      Show the macOS app language
+      wtp language en   Use English (the only interface language)
+
+    The app, terminal interface and JSON use English.
+
+    Press ? in wtp for keys. Settings are shared with the DevDock menu bar app.
+    """
+
+    static var appLanguage: InterfaceLanguage {
+        let defaults = UserDefaults(suiteName: appIdentifier)!
+        return defaults.string(forKey: Preferences.language).flatMap(InterfaceLanguage.init(rawValue:)) ?? .english
+    }
+
+    private static func configureLanguage(_ arguments: [String]) -> Never {
+        guard arguments.count <= 1,
+              arguments.first == nil || InterfaceLanguage(rawValue: arguments[0]) != nil else {
+            fputs("wtp: this build supports English only (en)\n", stderr)
+            exit(64)
+        }
+        if let value = arguments.first {
+            UserDefaults(suiteName: appIdentifier)?.set(value, forKey: Preferences.language)
+        }
+        print("App language: \(appLanguage.rawValue) (\(appLanguage.label))")
+        exit(0)
+    }
+
+    /// Bundle.main doesn't follow the `wtp` symlink, so find the app from the real executable.
+    private static var version: String {
+        let app = Bundle.main.executableURL?.resolvingSymlinksInPath()
+            .deletingLastPathComponent() // MacOS
+            .deletingLastPathComponent() // Contents
+            .deletingLastPathComponent()
+        let bundle = app.flatMap { $0.pathExtension == "app" ? Bundle(url: $0) : nil } ?? Bundle.main
+        return bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "dev"
+    }
+
+    // MARK: - List
+
+    @MainActor private static func list(json: Bool) -> Never {
+        let monitor = ServerMonitor()
+        monitor.handlesAlerts = false
+        monitor.isWatched = true
+        let unreachable = monitor.scanForOneLook()
+        for runtime in unreachable {
+            FileHandle.standardError.write(Data("wtp: couldn't reach \(runtime), so its containers aren't listed.\n".utf8))
+        }
+        let servers = monitor.servers
+        if json {
+            printJSON(servers, monitor: monitor)
+        } else if servers.isEmpty {
+            print("Nothing listening on ports \(monitor.minPort)–\(monitor.maxPort).")
+        } else {
+            printTable(servers, monitor: monitor)
+        }
+        exit(0)
+    }
+
+    @MainActor private static func printTable(_ servers: [Server], monitor: ServerMonitor) {
+        let depth = isatty(STDOUT_FILENO) == 1 ? ColorDepth.detect() : .none
+        let color = depth != .none
+        let isDark = UserDefaults.standard.persistentDomain(forName: UserDefaults.globalDomain)?["AppleInterfaceStyle"] as? String == "Dark"
+        let headers = ["PORT", "NAME", "BRANCH", "MEMORY", "CPU", "UP", "SESSION"]
+        let rows: [[String]] = servers.map { server in
+            [
+                ":\(server.port)",
+                server.project.name,
+                server.project.branch ?? "",
+                Format.bytesString(server.memory),
+                Format.percent(server.cpu),
+                server.uptime.map(Format.shortDuration) ?? "",
+                server.agent.map { agent in [agent.kind.rawValue, agent.title].compactMap { $0 }.joined(separator: " · ") } ?? "",
+            ].map(SafeText.terminal)
+        }
+        let rightAligned: Set<Int> = [3, 4, 5]
+        let widths = headers.indices.map { column in
+            ([headers[column]] + rows.map { $0[column] }).map(TextWidth.of).max() ?? 0
+        }
+        func format(_ cells: [String]) -> [String] {
+            cells.map(SafeText.terminal).enumerated().map { column, cell in
+                let pad = String(repeating: " ", count: widths[column] - TextWidth.of(cell))
+                return rightAligned.contains(column) ? pad + cell : cell + pad
+            }
+        }
+        let dim = color ? "\u{1B}[2m" : "", reset = color ? "\u{1B}[0m" : ""
+        func paint(_ pair: Palette.Pair) -> String {
+            let rgb = RGB(isDark ? pair.dark : pair.light)
+            if depth == .ansi256 { return "\u{1B}[38;5;\(TerminalScreen.ansi256(rgb))m" }
+            let (r, g, b) = rgb.bytes
+            return "\u{1B}[38;2;\(r);\(g);\(b)m"
+        }
+        print(dim + format(headers).joined(separator: "  ").trimmingTrailingSpaces() + reset)
+        for (server, row) in zip(servers, rows) {
+            var cells = format(row)
+            if color {
+                cells[0] = paint(Palette.ports[monitor.colorIndex(for: server.port) % Palette.ports.count]) + cells[0] + reset
+                if monitor.status(of: server) == .attention {
+                    cells[3] = paint(Palette.amber) + cells[3] + reset
+                }
+            }
+            print(cells.joined(separator: "  ").trimmingTrailingSpaces())
+        }
+    }
+
+    @MainActor private static func printJSON(_ servers: [Server], monitor: ServerMonitor) {
+        let iso = ISO8601DateFormatter()
+        let objects: [[String: Any]] = servers.map { server in
+            var object: [String: Any] = [
+                "port": server.port,
+                "url": server.url.absoluteString,
+                "name": server.project.name,
+                "memoryBytes": server.memory,
+                "cpuPercent": (server.cpu * 10).rounded() / 10,
+                "processes": server.processes.map { ["pid": Int($0.pid), "name": $0.name, "memoryBytes": $0.memory] },
+                "status": { () -> String in
+                    if server.container?.isRunning == false { return "stopped" }
+                    switch monitor.status(of: server) {
+                    case .running: return "running"
+                    case .attention: return "attention"
+                    case .idle: return "idle"
+                    case .paused: return "paused"
+                    }
+                }(),
+                "protected": server.isProtected,
+            ]
+            // A container's listener is its runtime's helper; signalling that pid
+            // would stop every container, so scripts get the container instead.
+            if let container = server.container {
+                var info: [String: Any] = ["id": container.id, "name": container.name, "image": container.image,
+                                           "runtime": container.runtime.name]
+                info["composeProject"] = container.composeProject
+                info["composeService"] = container.composeService
+                info["running"] = container.isRunning
+                info["paused"] = container.isPaused
+                info["portMappings"] = container.bindings.map { ["hostIP": $0.hostIP, "hostPort": $0.hostPort, "containerPort": $0.containerPort] as [String: Any] }
+                object["container"] = info
+            } else {
+                object["pid"] = Int(server.pid)
+            }
+            object["controlWarning"] = server.controlWarning
+            object["branch"] = server.project.branch
+            object["framework"] = server.project.framework
+            object["folder"] = server.cwd
+            object["command"] = server.command
+            object["startedAt"] = server.startedAt.map(iso.string)
+            object["conductorWorkspace"] = server.conductorWorkspace
+            if let pane = server.paneWorkspace {
+                object["pane"] = ["workspace": pane.name, "link": pane.link.absoluteString]
+            }
+            if let agent = server.agent {
+                var session: [String: Any] = ["kind": agent.kind.rawValue, "id": agent.id]
+                session["title"] = agent.title
+                object["session"] = session
+            }
+            return object
+        }
+        let data = (try? JSONSerialization.data(withJSONObject: objects, options: [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes])) ?? Data("[]".utf8)
+        FileHandle.standardOutput.write(data)
+        print()
+    }
+}
+
+private extension String {
+    func trimmingTrailingSpaces() -> String {
+        var result = self
+        while result.hasSuffix(" ") { result.removeLast() }
+        return result
+    }
+}

@@ -1,0 +1,1212 @@
+{
+  "scope": "Standalone DevDock source; excludes deleted files, ignored build/test artifacts, Git metadata and this inventory itself.",
+  "file_count": 201,
+  "files": [
+    {
+      "path": ".conductor/settings.toml",
+      "bytes": 239,
+      "sha256": "6d4d997da85d6540e145461b3609034810dd81a21413bddd0327c418f414decb",
+      "executable": false
+    },
+    {
+      "path": ".github/workflows/deploy.yml",
+      "bytes": 7796,
+      "sha256": "f56e58dcb8c9183635d449f34e38d52dda45fcfed650b7bcd704f18bd5b77979",
+      "executable": false
+    },
+    {
+      "path": ".github/workflows/verify.yml",
+      "bytes": 949,
+      "sha256": "255048a3fad72083c690183a72e5c821a6c5f5da1f516766755f4e941da977c5",
+      "executable": false
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 426,
+      "sha256": "5fbf490d04fcadf0ad014a7311f11c12d01526735e91f94616db4b681d5edf04",
+      "executable": false
+    },
+    {
+      "path": ".vercelignore",
+      "bytes": 51,
+      "sha256": "0d2f14472202777c23e3fdb633034d7578751be69320f943256475b8668d1ecb",
+      "executable": false
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 3415,
+      "sha256": "9c845f1f973e819ae54516944f9ba13da3bc18f66d14a28c276ac192b42e2ee1",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Info.plist",
+      "bytes": 1283,
+      "sha256": "496f07f5505549f93b36d48784c7470cb6e23d8281285fb6d3bb6ba1f69253b6",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Package.resolved",
+      "bytes": 1205,
+      "sha256": "286ae895ae8d501f8b42e4598cb590328366344830693084ebf474c4b41f18b5",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Package.swift",
+      "bytes": 1026,
+      "sha256": "ee026a82c25c90c25001f70dd22d2d1c510f09ef914a41da8b97c1d86d0460d7",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Resources/AppIcon.icns",
+      "bytes": 1327021,
+      "sha256": "e48eb80cd202fda5f65dbf4bc4a0c5df2fd51dea43bdc306e0f1f41bc559e163",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Resources/Fonts/Geist-Medium.ttf",
+      "bytes": 127660,
+      "sha256": "0090e004725f6f64b841715b4167920580f883fcf9b67fc6d744089103fec101",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Resources/Fonts/Geist-Regular.ttf",
+      "bytes": 126048,
+      "sha256": "5c8968eafb98a4c4f47033daf29e38e284a6f2a82eb017d171ab040fe7c4b615",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Resources/Fonts/GeistMono-Medium.ttf",
+      "bytes": 149328,
+      "sha256": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Resources/Fonts/GeistMono-Regular.ttf",
+      "bytes": 148516,
+      "sha256": "42d8ad2e610238e64e8abfcde3037c63f7850a73928742b7ab7229d897bcb155",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Resources/Fonts/OFL.txt",
+      "bytes": 4368,
+      "sha256": "930853ee1daa68554d9e35c8a9175affb74f699fad9a5da6ee5ebe76379d9137",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/DevDockApp.swift",
+      "bytes": 6221,
+      "sha256": "886bfc66d5375e37b9c411a2c64a0aabba303ab4777bf81e07bc24bea8d66278",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/AgentSessions.swift",
+      "bytes": 8858,
+      "sha256": "bd6d28d3f821442e602b53ac4616ab2a858d97287a07f9bc037ca8512437534c",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/AlertCenter.swift",
+      "bytes": 12522,
+      "sha256": "e737fa10b55db80a9c3e0ba30c887a3d29d04c4bdb15bedb9b52ecfdc2fa4155",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/AppUpdater.swift",
+      "bytes": 3634,
+      "sha256": "4f00753e3f41dd93b1fe038885495424c9f2adbfb8c5e4633bdc2c54ac00cd5d",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/AppUsage.swift",
+      "bytes": 7858,
+      "sha256": "44e5d037b4cab242bc8035c0fd14a79f00d5e6712d5a1eec284c40d29d203b6b",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/BoundedCommand.swift",
+      "bytes": 2428,
+      "sha256": "1fc3f9609936e0a7e675fde36e239f338489b3208142d37c8d359215b9e2af77",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/BoundedFile.swift",
+      "bytes": 1491,
+      "sha256": "f9944f593cbfee59fa7b0bdb73076c1ede357b87bc86d2f482d365a9d4f3e829",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/CommandLineTool.swift",
+      "bytes": 3773,
+      "sha256": "956aa91f02979df8c3e81f6e363136a75879bc42f1c12222b8928fc38e0bfe30",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/ContainerMonitor.swift",
+      "bytes": 10833,
+      "sha256": "bf59272f57ec8ed04440cc9ae58f3e87513802de72ea37cc7b7d70ceb8a94111",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/Containers.swift",
+      "bytes": 26454,
+      "sha256": "cb865a4d75f9267fe5add3188949f2e78af3142fb6a053a64ad47e1a99a55530",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/GitHubLookup.swift",
+      "bytes": 6806,
+      "sha256": "856fe98110a4bf2012e2459e61d71c57765efadb64eaef815ba527d91e97ad26",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/HotKey.swift",
+      "bytes": 1336,
+      "sha256": "e01e4cd9d66de202402691a07b8628ba58ab06cf0f42b4daffb6711615fc8871",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/Launchers.swift",
+      "bytes": 5702,
+      "sha256": "3165d9a0fe0c8742ff0a606d9e8dbb52ed551a57987306f34aebaa395afd1fbb",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/Localization.swift",
+      "bytes": 1468,
+      "sha256": "113bc2383662d0a140af7a197df0c1e755089ef6c98b972a55af425a8235e452",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/Preferences.swift",
+      "bytes": 4157,
+      "sha256": "04268d30920aac5202ef9de2154362fa9f814239ee6ba76ac6221d4ba6c57cff",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/ProcessControl.swift",
+      "bytes": 9027,
+      "sha256": "c10c7fa22ede6cc62d7d05db155b559a6a6a8de318be75c924d542e894887d62",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/ProcessInspector.swift",
+      "bytes": 8020,
+      "sha256": "3d1fc55b593b9bef7cba7bc68061dad98dd723a3d2e52e27a574dfeab12048a2",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/ProcessTree.swift",
+      "bytes": 2720,
+      "sha256": "7bbe7e444ebeecdd0af2399d120f32c96d5f754884f672e58a0be1618063df99",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/ProjectResolver.swift",
+      "bytes": 8427,
+      "sha256": "bb7b13b1d567b5255bb3dd4be8edc7ad596094fa652416e2d7c8cb8df3bb2b6c",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/ScanEngine.swift",
+      "bytes": 26284,
+      "sha256": "7ae6dd6c820c7418ad4f3b23022e0c9d720ac810e68fbd547de00c08a77eac08",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/Server.swift",
+      "bytes": 8939,
+      "sha256": "617ba14c3297ea4829e7d9b81bcb7ded3ff577450460466ea5fd0cf95682029e",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/ServerMonitor.swift",
+      "bytes": 18505,
+      "sha256": "e4ce387604e5df849a9369e45ffcc475e977fec8bb1510fa38be71ab36ef379e",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/ServerResources.swift",
+      "bytes": 1685,
+      "sha256": "6e03eb4bda6e2e007721cdcc18e5575cd4fe8cc70f6c8bd3ddabb3f40929b733",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/SocketScanner.swift",
+      "bytes": 3162,
+      "sha256": "6678d8252a404c6c47946f3147edb71beba6863712125329b82316d059ff88b7",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Engine/Usage.swift",
+      "bytes": 1178,
+      "sha256": "2c78ec720e40d859aca8c2e1f7796af61827b11071e624a4bafd9aab9f07153b",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Resources/en.lproj/Localizable.strings",
+      "bytes": 16225,
+      "sha256": "4ae73c9133e2e97e47698edfd12f22a6760d908dd71bb59594597ea4b698fbe2",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Terminal/SafeText.swift",
+      "bytes": 391,
+      "sha256": "233d29914427bcb65d3204a3e723e56f630f059ef2c9f64751a463cd7363c8d4",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Terminal/TerminalApp.swift",
+      "bytes": 58313,
+      "sha256": "30c12d2d59f1ee4590f5dc8f430d5f8be2612705d6f351d8c6c5c9b877768eb3",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Terminal/TerminalCommand.swift",
+      "bytes": 9997,
+      "sha256": "b14ea628dbba79cb1f63439626cbe79b621a3e11c550c93ff0271a9a6dd6d26b",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Terminal/TerminalPalette.swift",
+      "bytes": 5091,
+      "sha256": "94712ee539ef9efd487c0969fad6bb56af59cbac171b359ad60ecb10db6d7e42",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/Terminal/TerminalScreen.swift",
+      "bytes": 18091,
+      "sha256": "6c860fc7ae21e5a46034942952b8e53d8001f796f277dc4bcae73cae81fc413a",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/UI/Components.swift",
+      "bytes": 8632,
+      "sha256": "6312d23a98c2b05138cc5989d3054e1b671bc4e7015390aec1ba1bb0659e0b6a",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/UI/DevDockMark.swift",
+      "bytes": 2937,
+      "sha256": "29b5423e7b1e5e5042da64cce2abd771b0c00c4c4d7785afbe1f3822c187834f",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/UI/DotGrid.swift",
+      "bytes": 9069,
+      "sha256": "8490d19297e28f2237ca9cd38e54e46f60fe7638ab4403efefa502f7b7172d04",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/UI/LocalizedView.swift",
+      "bytes": 309,
+      "sha256": "e8283ec1e29d6d26113bf67362156e99306d471f407fc6ff2cc109598fcf7d45",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/UI/OnboardingConfirmation.swift",
+      "bytes": 4067,
+      "sha256": "c828444955e6911a06830ff323d3ce0b5be9d63ca59379d3b3d76f7146cb5f20",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/UI/OnboardingStatus.swift",
+      "bytes": 8600,
+      "sha256": "1ec55e55e245d8747631a5d54b13d1557ff3faa0e89640ef28a36dcd74ecdadf",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/UI/OnboardingView.swift",
+      "bytes": 21529,
+      "sha256": "e39d37009c5419624daacbe09d313e3f95f2f755393c14242d98a469ed583e96",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/UI/PopoverRoot.swift",
+      "bytes": 4998,
+      "sha256": "54a3df3dd66cb54790a1d3aac52b92ad9b183fb01d9a8b348a4192b5ed5af2b9",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/UI/ServerDetailView.swift",
+      "bytes": 27199,
+      "sha256": "87720af4d186f81d41f6d040aec776a4d215f8a4562e829e5ce72d1d0f549977",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/UI/ServersView.swift",
+      "bytes": 34702,
+      "sha256": "964e5f01a2cce43284586e0c1c654a3718bcf2e8c8a84c8ef220006080727a9b",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/UI/ServiceGlyph.swift",
+      "bytes": 23614,
+      "sha256": "6ad21dbe56ad4d6e564f37386d02446ead8f0ccf628392722388bffa9fed6f1a",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/UI/SettingsView.swift",
+      "bytes": 29030,
+      "sha256": "f8494e3c9994be3a4a6eda7022e57d8c8b2dc6eb498ae7954ab57a869ac7accf",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/UI/SnapshotRenderer.swift",
+      "bytes": 9773,
+      "sha256": "d053e39f2b482ea152676592b2524c79bacfaf3f9653f0b15c6ef06abafbac55",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/UI/StatusItemMenu.swift",
+      "bytes": 3244,
+      "sha256": "d44ca8a3a8044662074ec958d5e05b107c952ec547e7f8ec2d117aa2993ba588",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Sources/DevDock/UI/Theme.swift",
+      "bytes": 7567,
+      "sha256": "19ad59c24dcb53e80f113c031209f39418ea89e5882703dc97ea50e981663abc",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Tests/DevDockTests/ContainerTests.swift",
+      "bytes": 11463,
+      "sha256": "615baeb0f867c2ab1173c9452bda3118d1b33c4cff539a473c442381a125598c",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Tests/DevDockTests/LiveIntegrationTests.swift",
+      "bytes": 10945,
+      "sha256": "e0a7fcd93ed5c15690f4e31e9fb929ce90a79ba062d35bfca03246ae76f69d2f",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Tests/DevDockTests/LocalizationTests.swift",
+      "bytes": 2179,
+      "sha256": "f999daa182e460b5a2271666cd3034554d66aeb6423b20abc10f25855775824f",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Tests/DevDockTests/OnboardingStatusTests.swift",
+      "bytes": 8301,
+      "sha256": "d237367ebeb790adbd0ee03497347e3a8d3971bd1348bab93039a089b5c7aef4",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Tests/DevDockTests/PaneWorkspaceTests.swift",
+      "bytes": 669,
+      "sha256": "10f1cdffab23ab3c839424ec2d22d8c41c65bfc793c78a2bd5457e593a32652d",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Tests/DevDockTests/ScanEngineTests.swift",
+      "bytes": 32616,
+      "sha256": "65b331a35321204c4dd5b71b15b39e874c7a909d426c287825b8f1b55edffd25",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Tests/DevDockTests/SecurityTests.swift",
+      "bytes": 14182,
+      "sha256": "062cb63b5990995c855e6c5f74fe77f5be007db7163a7736a1d71c916e33f3b5",
+      "executable": false
+    },
+    {
+      "path": "DevDock/Tests/DevDockTests/TerminalTests.swift",
+      "bytes": 2071,
+      "sha256": "0781d0b400ec041f04f565af58877bf74f79698eca62fedf78f68b6092e5f397",
+      "executable": false
+    },
+    {
+      "path": "DevDock/UPDATES.md",
+      "bytes": 2665,
+      "sha256": "6c7a23e53a6b8860c8b05bc8588b4f92764d0e3e82deff15ce1d69b6fd50824b",
+      "executable": false
+    },
+    {
+      "path": "DevDock/build-app.sh",
+      "bytes": 3129,
+      "sha256": "4ffbc4ce73f28de43919836d150de9e25efaa2ca3f6361a9e9a6f4f8f9a37335",
+      "executable": true
+    },
+    {
+      "path": "DevDock/dmg/background.png",
+      "bytes": 17669,
+      "sha256": "b993e0ffbc20e7436def371cfb48f8ede50aaf328a73968dcbece8093799dd3a",
+      "executable": false
+    },
+    {
+      "path": "DevDock/dmg/background@2x.png",
+      "bytes": 51521,
+      "sha256": "4a6da2a32856709e39f1d8fe40e78657d118ebb6d01092c91c4a7deab1c0b6cf",
+      "executable": false
+    },
+    {
+      "path": "DevDock/dmg/requirements.in",
+      "bytes": 16,
+      "sha256": "cbaf90d046bcdc9a006d3852908a16ff93f38f711b32ffc8cc3bd0d31214cfc4",
+      "executable": false
+    },
+    {
+      "path": "DevDock/dmg/requirements.lock",
+      "bytes": 845,
+      "sha256": "64bf9e11997900aa1bb801242d019b7c86e12af52d8f6265f76d549f6a99b7c0",
+      "executable": false
+    },
+    {
+      "path": "DevDock/dmg/settings.py",
+      "bytes": 950,
+      "sha256": "fd59a6b068108f79d97c5ec0f75953d628a3d3715d68b0e8c15bb9106eaf3084",
+      "executable": false
+    },
+    {
+      "path": "DevDock/make-dmg.sh",
+      "bytes": 1080,
+      "sha256": "af56f53780fd1c87f8e66e31cb2b2ee4954b0a08a3de8418d7de41e3fe516d92",
+      "executable": true
+    },
+    {
+      "path": "DevDock/release.sh",
+      "bytes": 4392,
+      "sha256": "0d1fe6c95f9c1cda599ba8e44d03f983968d06e55a746da2296f8433a9479fad",
+      "executable": true
+    },
+    {
+      "path": "DevDock/scripts/configure-updates.py",
+      "bytes": 1850,
+      "sha256": "e329149bdefaeb5a86d58fbb067dc206852d7f811fc99d9eaf5b65686c77fbc3",
+      "executable": false
+    },
+    {
+      "path": "DevDock/scripts/test-configure-updates.py",
+      "bytes": 2678,
+      "sha256": "11fdd7ad8c7756bada4ccf8fa6bfec4a59c5480fe288a64180cc0f534042311a",
+      "executable": false
+    },
+    {
+      "path": "DevDock/scripts/verify-update-signature.swift",
+      "bytes": 894,
+      "sha256": "56e18243c19ae94ec885051120d1f3fa6a57be39ae5daa05f6778733f920becd",
+      "executable": false
+    },
+    {
+      "path": "DevDock/update-config.env.example",
+      "bytes": 420,
+      "sha256": "ac72e023f54856e3c7c74945b604d595cc53895e64b63bc088143f9644062d23",
+      "executable": false
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1131,
+      "sha256": "e8bd699a879582472e8f286b8fb69b70b3a8ecc4d6bfe474f085f4034eedc9f6",
+      "executable": false
+    },
+    {
+      "path": "LOCALIZATION.md",
+      "bytes": 662,
+      "sha256": "c56d51b15b65496452541d856e40941423fb329e04692719b16044c96f786136",
+      "executable": false
+    },
+    {
+      "path": "README.md",
+      "bytes": 3810,
+      "sha256": "e061d8bf971bdfe9927531b41b03a3f7a67fee124366930d46fa681a70d06971",
+      "executable": false
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "bytes": 12072,
+      "sha256": "5abf1ea7da866bc560d1f462cc39558c6e6bc82835ff81376253f91616ad5094",
+      "executable": false
+    },
+    {
+      "path": "app/components/App.tsx",
+      "bytes": 41984,
+      "sha256": "79002793d09797e7e5fa4a414033cf1726469cfc8a5310839e7bf02e084f6e87",
+      "executable": false
+    },
+    {
+      "path": "app/components/Copy.tsx",
+      "bytes": 7163,
+      "sha256": "e1d9ceab23fa7b921b2ffe7750291713b04f072fa76461cfb0816fc85038c6a9",
+      "executable": false
+    },
+    {
+      "path": "app/components/DevDockLogo.tsx",
+      "bytes": 654,
+      "sha256": "a51cf4acf69541145410cdd73226ff7fae59319191958bbef9923a1db9f4b546",
+      "executable": false
+    },
+    {
+      "path": "app/components/DotMatrix.tsx",
+      "bytes": 3035,
+      "sha256": "6dac58dd86229543ec4a99d9f466e4ad2346748e04a5f30fa930fd3c88d12fee",
+      "executable": false
+    },
+    {
+      "path": "app/components/JsonLd.tsx",
+      "bytes": 316,
+      "sha256": "bcd8098d1da37ed467ce8f77458b892cc12ce3d09d51f75c00b68ebf8478d2bb",
+      "executable": false
+    },
+    {
+      "path": "app/components/Landing.tsx",
+      "bytes": 10193,
+      "sha256": "dd33cc8916632802b94ca709c49e12b9d0ff09c7b75eb89d3f87afd0827f18b3",
+      "executable": false
+    },
+    {
+      "path": "app/components/LanguageHeadline.tsx",
+      "bytes": 209,
+      "sha256": "574b2e18436c28023c25d8431aef1fd3c2c9b23e45a877f7125003b18afd14ff",
+      "executable": false
+    },
+    {
+      "path": "app/components/Screen.tsx",
+      "bytes": 5080,
+      "sha256": "fc240e48d96d4b1864cd2b5f86444df9373cf48789b0a289a50b49752c9f4112",
+      "executable": false
+    },
+    {
+      "path": "app/components/Terminal.tsx",
+      "bytes": 51984,
+      "sha256": "b8dc39d6434fdba648079ae901b0546ca3322dc027e9620bf9f9756763c87bc0",
+      "executable": false
+    },
+    {
+      "path": "app/components/icons.tsx",
+      "bytes": 12112,
+      "sha256": "b9c8f8703917a84775444225bc3b27f3a418f2cf22b1aacb72b374866a71b698",
+      "executable": false
+    },
+    {
+      "path": "app/components/landing.module.css",
+      "bytes": 33394,
+      "sha256": "3700ca03c8429c86acc184815232e8153b85adbeab91f8d8af90f695e712d0a5",
+      "executable": false
+    },
+    {
+      "path": "app/components/languages.ts",
+      "bytes": 1225,
+      "sha256": "9ac3337bb9fdc7776af73fa3e7708dbdb8c3e08b1fba45f4f03940fec7b4e291",
+      "executable": false
+    },
+    {
+      "path": "app/components/sections.ts",
+      "bytes": 1068,
+      "sha256": "a795445b65387ec4b1a47c383679bdc1f1b25e75adb371e446be185fc93a0d70",
+      "executable": false
+    },
+    {
+      "path": "app/components/servers.ts",
+      "bytes": 16332,
+      "sha256": "962d5cd4c32aef2329d4d43ee136d4c8b31eecc27a4aff214be9c83a2193091b",
+      "executable": false
+    },
+    {
+      "path": "app/globals.css",
+      "bytes": 728,
+      "sha256": "3276a868eb99691cda27ce2e6e5584265c4150c3bcdd00d3a7f62b59bfcb7094",
+      "executable": false
+    },
+    {
+      "path": "app/guides/Chrome.tsx",
+      "bytes": 3996,
+      "sha256": "16ce09014af258be4f2eda747fc9fade884d134dd38c7eac88ca604b8f761ffb",
+      "executable": false
+    },
+    {
+      "path": "app/guides/[slug]/page.tsx",
+      "bytes": 3396,
+      "sha256": "f36cdfc64a9c3aaac4b9457978b14ea401c2b67007acffc767e91c80e98097ce",
+      "executable": false
+    },
+    {
+      "path": "app/guides/guides.module.css",
+      "bytes": 9461,
+      "sha256": "d0e49ca83639195280a5071fb8d8dff74a8c0176664e64fb3a567112820d753e",
+      "executable": false
+    },
+    {
+      "path": "app/guides/layout.tsx",
+      "bytes": 318,
+      "sha256": "265033ccea9f185619ff704ff5566bacd83cbef239426cde701d417b5aa02f00",
+      "executable": false
+    },
+    {
+      "path": "app/guides/page.tsx",
+      "bytes": 1976,
+      "sha256": "b3e237091a2495fac8aed3e3617cd7124a3f5ef6951aa847653f9c990ba292a1",
+      "executable": false
+    },
+    {
+      "path": "app/layout.tsx",
+      "bytes": 2158,
+      "sha256": "c30f24b32d581e967c5e98ff65ad96fae0dacb363c5a00d58d948757a5538fed",
+      "executable": false
+    },
+    {
+      "path": "app/llms-full.txt/route.ts",
+      "bytes": 215,
+      "sha256": "12fd333af9cf8d123a03cff3cb668d0d52898ce6eed49fe562915d243da47530",
+      "executable": false
+    },
+    {
+      "path": "app/llms.txt/route.ts",
+      "bytes": 207,
+      "sha256": "d780b97ac1a19954c10588769c73fecd0644d6222baef3f11917f06d33fb9b61",
+      "executable": false
+    },
+    {
+      "path": "app/md/[...path]/route.ts",
+      "bytes": 680,
+      "sha256": "6b0e9ab095f4248594bed0d9ca824cf1461ef8860570e6ee490e4b13941cf7c5",
+      "executable": false
+    },
+    {
+      "path": "app/page.tsx",
+      "bytes": 300,
+      "sha256": "d10c8efdaf0f550c068fa408d94899934b0b31de577c1459c8f2813181ec3747",
+      "executable": false
+    },
+    {
+      "path": "app/robots.ts",
+      "bytes": 456,
+      "sha256": "81bce5e219b0910f83b2969a3e2cd8a439bde2b3e8e703e30d6f3b4a00ba3c3e",
+      "executable": false
+    },
+    {
+      "path": "app/sitemap.ts",
+      "bytes": 617,
+      "sha256": "da9722d360029681bb37d03bbf0f3fae1ea71769340d7c7b8d737c47ae19eb52",
+      "executable": false
+    },
+    {
+      "path": "content/devdock.md",
+      "bytes": 9392,
+      "sha256": "cc367c9af49ce490a5e10c370de1128f629e36432638cc47e19df599453da915",
+      "executable": false
+    },
+    {
+      "path": "content/guides/change-app-language.md",
+      "bytes": 762,
+      "sha256": "0f225265152f33af54a54c104db34becf45d957574899d47bdd9aaaebf6b46a5",
+      "executable": false
+    },
+    {
+      "path": "content/guides/claude-code-dev-server-left-running.md",
+      "bytes": 5102,
+      "sha256": "1f8126715a65efce11d66babc58155974be360619c18c4e92b74cce0a68def67",
+      "executable": false
+    },
+    {
+      "path": "content/guides/dev-server-memory-leak-mac.md",
+      "bytes": 5022,
+      "sha256": "6cb04d65b6192320fd5744d48b32f0c232662c604ea33a9a0325ad2b8ff91de6",
+      "executable": false
+    },
+    {
+      "path": "content/guides/eaddrinuse-address-already-in-use.md",
+      "bytes": 4727,
+      "sha256": "f1d2b5a3e8c5776155278f5f2a6bb934c24a0ffc0aff221103d2277c3251c645",
+      "executable": false
+    },
+    {
+      "path": "content/guides/mac-apps-to-manage-localhost-ports.md",
+      "bytes": 5472,
+      "sha256": "f34150ebf166140d126de0c9fc78d73fc6a8eb1d19bb35ca36063fa68f300da1",
+      "executable": false
+    },
+    {
+      "path": "content/guides/parallel-coding-agents-git-worktrees-ports.md",
+      "bytes": 4667,
+      "sha256": "92fc1ebb0a5c51ea61a5caadd0997e679227b1853f40e69608eeff817b6baef0",
+      "executable": false
+    },
+    {
+      "path": "content/guides/port-3000-already-in-use-mac.md",
+      "bytes": 4285,
+      "sha256": "5505d598f5cdd660541a60fbcfd6b9c43f99385be3f7e9585a6992881bd46f35",
+      "executable": false
+    },
+    {
+      "path": "content/guides/port-5000-in-use-mac-airplay.md",
+      "bytes": 2600,
+      "sha256": "28b1f93f1d6676ac758a03aa4f4c58e43f25ac3965c75ae2474217bca38a4b62",
+      "executable": false
+    },
+    {
+      "path": "content/guides/see-every-dev-server-running-on-mac.md",
+      "bytes": 4082,
+      "sha256": "602ef65f2d4cfda8c22985b3d18dcf1f41f11d68614f8709636632a30d474fd6",
+      "executable": false
+    },
+    {
+      "path": "content/guides/vite-port-5174-nextjs-port-3001.md",
+      "bytes": 3955,
+      "sha256": "2f72d818abc3651f6353c3d7e78f5077e86c93f9b546a931a821b86c8dd5a086",
+      "executable": false
+    },
+    {
+      "path": "docs/audit/PLAN.md",
+      "bytes": 614,
+      "sha256": "36f04077de03bda3f8d4c68440d44eb2ef36cebb1eb3fff1a8e16d047c764289",
+      "executable": false
+    },
+    {
+      "path": "docs/audit/REPORT.md",
+      "bytes": 6669,
+      "sha256": "a2e1fd7d4612847072400fac23b23c582069ded65fc43168456dc4829b3a892b",
+      "executable": false
+    },
+    {
+      "path": "docs/audit/VERIFICATION.md",
+      "bytes": 4197,
+      "sha256": "5d09fd847e2a3ca7ab55d24740edb25b1acb9fba7c034046a8356cf135a4d0a7",
+      "executable": false
+    },
+    {
+      "path": "docs/brand/README.md",
+      "bytes": 2653,
+      "sha256": "f6688b84dafe20557ac4162f1142d40413a1e40e36895fe1ae9068838aa366d4",
+      "executable": false
+    },
+    {
+      "path": "docs/brand/build-vectors.py",
+      "bytes": 4586,
+      "sha256": "746ef7f9f0321902828835400e7dc446bb14aec7e0422bbfa7e40670ec5e82c0",
+      "executable": false
+    },
+    {
+      "path": "docs/brand/concepts/01-midnight.png",
+      "bytes": 1488143,
+      "sha256": "d8ff7ed895618dea6790c1538e1c9b0eab826e1e86cd3e1ee03c51c0a2922c1e",
+      "executable": false
+    },
+    {
+      "path": "docs/brand/concepts/02-amber.png",
+      "bytes": 1563392,
+      "sha256": "3a784ed509c6b88e7981e27343cd44211833965fd90c06cd4d84e27481a1fb59",
+      "executable": false
+    },
+    {
+      "path": "docs/brand/concepts/03-monochrome.png",
+      "bytes": 1386071,
+      "sha256": "4d9daf282dc642c31280f2bba6cf22e2d921b6e51ca5554f8559a0e22b351073",
+      "executable": false
+    },
+    {
+      "path": "docs/brand/midnight/DevDock.icns",
+      "bytes": 1327021,
+      "sha256": "e48eb80cd202fda5f65dbf4bc4a0c5df2fd51dea43bdc306e0f1f41bc559e163",
+      "executable": false
+    },
+    {
+      "path": "docs/brand/midnight/app-icon-master.png",
+      "bytes": 1136747,
+      "sha256": "3627ce647b92675fee203cea680eb8ecd00fbe932ef591527f6591cd89489c6c",
+      "executable": false
+    },
+    {
+      "path": "docs/brand/midnight/devdock-logo-dark.png",
+      "bytes": 33027,
+      "sha256": "77cb33a2120454aeda347e5afcfc7206b57976584a9fec391c5bdae95dfdc626",
+      "executable": false
+    },
+    {
+      "path": "docs/brand/midnight/devdock-logo-dark.svg",
+      "bytes": 2507,
+      "sha256": "7863aff403019c817cc6fc25a3adee283d95ca663e44882ce156c6ddfe05b23e",
+      "executable": false
+    },
+    {
+      "path": "docs/brand/midnight/devdock-logo-light.png",
+      "bytes": 33866,
+      "sha256": "c6fa9637a42a801e8d120b45ae64fbad182ab63ed9e85b21649a9960a240b2b3",
+      "executable": false
+    },
+    {
+      "path": "docs/brand/midnight/devdock-logo-light.svg",
+      "bytes": 2507,
+      "sha256": "f7da48c775ae4b3cfe29fd8c23b5fbec784783ee30c65faddb38ba82d8d2468d",
+      "executable": false
+    },
+    {
+      "path": "docs/brand/midnight/devdock-mark.png",
+      "bytes": 7949,
+      "sha256": "7917accf1277dffc9484c84e4cc16e625d063b330dd33edf560a4023dbee6ba3",
+      "executable": false
+    },
+    {
+      "path": "docs/brand/midnight/devdock-mark.svg",
+      "bytes": 442,
+      "sha256": "bfcc272768e48ed67b28fd78e5606ac6b7f4776e4bae8a4c9c00051afa186bfc",
+      "executable": false
+    },
+    {
+      "path": "docs/brand/midnight/devdock-menubar.png",
+      "bytes": 5664,
+      "sha256": "8ea3ac77d5a8a738ef3b1f2ae872c60c54483774021f77f9ddb65f0b92e90851",
+      "executable": false
+    },
+    {
+      "path": "docs/brand/midnight/devdock-menubar.svg",
+      "bytes": 442,
+      "sha256": "2676d252cc931170a8fbbdc1e115d725fffa836f1a0da7e0d370b5b09746c95b",
+      "executable": false
+    },
+    {
+      "path": "docs/brand/midnight/github-banner.png",
+      "bytes": 1359785,
+      "sha256": "bee34a77d5141ab0fc1d032bda134ccf85c804473f18ba54de408723db5aded7",
+      "executable": false
+    },
+    {
+      "path": "docs/brand/midnight/github-social-1280x640.png",
+      "bytes": 740584,
+      "sha256": "c759b2285e989d84900afa8ff73bbf9d70beb26e0c0c12806094efda15b6b825",
+      "executable": false
+    },
+    {
+      "path": "docs/brand/midnight/mark-paths.json",
+      "bytes": 302,
+      "sha256": "12312569a1c2821dfae4b5d281a4d79fd6d39fb552947d64784be05ba21e1ec9",
+      "executable": false
+    },
+    {
+      "path": "docs/brand/prompts.json",
+      "bytes": 8140,
+      "sha256": "d0275664b9838a80f0c11bf956a4059c3ac3d27d1e5dd02160d8c2292bddd310",
+      "executable": false
+    },
+    {
+      "path": "docs/brand/render-assets.mjs",
+      "bytes": 890,
+      "sha256": "67beae3ec1c5f99da76dc7e0aaa9ca45106e4cd7013316657c98fdf46b265459",
+      "executable": false
+    },
+    {
+      "path": "docs/brand/requirements.in",
+      "bytes": 36,
+      "sha256": "730eb0fb8a9958810e03fadc8251fca92cce7b490acafeaf257f2cf232ff24e7",
+      "executable": false
+    },
+    {
+      "path": "docs/brand/requirements.lock",
+      "bytes": 7521,
+      "sha256": "32bc8c217edca542bf0f353e7ef5a19ce2564557dfc01e2bcad4af2025890149",
+      "executable": false
+    },
+    {
+      "path": "docs/images/audited-servers.png",
+      "bytes": 26445,
+      "sha256": "120f1490e58da93ecda8aa4e3733d22f044d66edcffe5e8462fe570773c25e71",
+      "executable": false
+    },
+    {
+      "path": "docs/images/clean-up.jpg",
+      "bytes": 180868,
+      "sha256": "31c1d6e582b8e897fe9340a82371bdc580343946e409b39f12bfd0474ee8cd88",
+      "executable": false
+    },
+    {
+      "path": "docs/images/leaks.jpg",
+      "bytes": 122108,
+      "sha256": "31b3bd481236a42bc394e71103141ead24b5b76d295abdf190d0a89a8bfb4636",
+      "executable": false
+    },
+    {
+      "path": "docs/images/servers.jpg",
+      "bytes": 179799,
+      "sha256": "8022acb73d04203073b2b9313f16595928ad3ecc939aa4b7af8567a3e1f57745",
+      "executable": false
+    },
+    {
+      "path": "docs/images/sessions.jpg",
+      "bytes": 129339,
+      "sha256": "95330e4bb6d68ef771e54bad4cb6f949183bee9ffa0971b51c2e2982cf729292",
+      "executable": false
+    },
+    {
+      "path": "lib/content.ts",
+      "bytes": 4517,
+      "sha256": "a3ac8d46b7b461524b7c7e24c24b176b7eaf8a572bdb14822056b2ebd5b34023",
+      "executable": false
+    },
+    {
+      "path": "lib/markdown-docs.ts",
+      "bytes": 2775,
+      "sha256": "2b4f58873953e1bd335c851e616e4c4a49124753478eb5623d8e5e687642782d",
+      "executable": false
+    },
+    {
+      "path": "lib/structured-data.ts",
+      "bytes": 3023,
+      "sha256": "10cc09f971f868d12e8442072c7f1c63ed56a5f26a9a94b11a67ac3da19f1e43",
+      "executable": false
+    },
+    {
+      "path": "next-env.d.ts",
+      "bytes": 288,
+      "sha256": "1862ac4bbbc5192d4bf562161df66ea547ed3e67173100656ab606ae9797db2b",
+      "executable": false
+    },
+    {
+      "path": "next.config.js",
+      "bytes": 1692,
+      "sha256": "8674c85980b567dbea36decf7093aa769291772ea3a5654325c474a9fb154943",
+      "executable": false
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 42346,
+      "sha256": "b3f3e18a06c0e42c525d91c4ffa0c1f0cefd2827cfbaf6cb30b1e321ce67c484",
+      "executable": false
+    },
+    {
+      "path": "package.json",
+      "bytes": 1130,
+      "sha256": "b4598280c359924b830dab767edf016ddeae9f5bdd10e966aa2e8eb14a11b279",
+      "executable": false
+    },
+    {
+      "path": "playwright.config.ts",
+      "bytes": 579,
+      "sha256": "d59f2a3cccbe31525a2f898e003e5a9e91a86acf3c11c957fdbd6862e268e74f",
+      "executable": false
+    },
+    {
+      "path": "proxy.ts",
+      "bytes": 1120,
+      "sha256": "4f3d2e31025b4256228064db4a76736d1a7934e46c181421a6274c80b2ea2db8",
+      "executable": false
+    },
+    {
+      "path": "public/brand/devdock-logo-dark.svg",
+      "bytes": 2507,
+      "sha256": "7863aff403019c817cc6fc25a3adee283d95ca663e44882ce156c6ddfe05b23e",
+      "executable": false
+    },
+    {
+      "path": "public/brand/devdock-logo-light.svg",
+      "bytes": 2507,
+      "sha256": "f7da48c775ae4b3cfe29fd8c23b5fbec784783ee30c65faddb38ba82d8d2468d",
+      "executable": false
+    },
+    {
+      "path": "public/brand/devdock-mark.svg",
+      "bytes": 442,
+      "sha256": "bfcc272768e48ed67b28fd78e5606ac6b7f4776e4bae8a4c9c00051afa186bfc",
+      "executable": false
+    },
+    {
+      "path": "public/brand/devdock-menubar.svg",
+      "bytes": 442,
+      "sha256": "2676d252cc931170a8fbbdc1e115d725fffa836f1a0da7e0d370b5b09746c95b",
+      "executable": false
+    },
+    {
+      "path": "public/brand/github-banner.png",
+      "bytes": 1359785,
+      "sha256": "bee34a77d5141ab0fc1d032bda134ccf85c804473f18ba54de408723db5aded7",
+      "executable": false
+    },
+    {
+      "path": "public/fonts/Geist-Medium.ttf",
+      "bytes": 127660,
+      "sha256": "0090e004725f6f64b841715b4167920580f883fcf9b67fc6d744089103fec101",
+      "executable": false
+    },
+    {
+      "path": "public/fonts/Geist-Regular.ttf",
+      "bytes": 126048,
+      "sha256": "5c8968eafb98a4c4f47033daf29e38e284a6f2a82eb017d171ab040fe7c4b615",
+      "executable": false
+    },
+    {
+      "path": "public/fonts/GeistMono-Medium.ttf",
+      "bytes": 149328,
+      "sha256": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25",
+      "executable": false
+    },
+    {
+      "path": "public/fonts/GeistMono-Regular.ttf",
+      "bytes": 148516,
+      "sha256": "42d8ad2e610238e64e8abfcde3037c63f7850a73928742b7ab7229d897bcb155",
+      "executable": false
+    },
+    {
+      "path": "public/icon-dark.svg",
+      "bytes": 442,
+      "sha256": "bfcc272768e48ed67b28fd78e5606ac6b7f4776e4bae8a4c9c00051afa186bfc",
+      "executable": false
+    },
+    {
+      "path": "public/icon-light.svg",
+      "bytes": 442,
+      "sha256": "bfcc272768e48ed67b28fd78e5606ac6b7f4776e4bae8a4c9c00051afa186bfc",
+      "executable": false
+    },
+    {
+      "path": "public/og-image.png",
+      "bytes": 740584,
+      "sha256": "c759b2285e989d84900afa8ff73bbf9d70beb26e0c0c12806094efda15b6b825",
+      "executable": false
+    },
+    {
+      "path": "public/scenes/coffee-shop.jpg",
+      "bytes": 251730,
+      "sha256": "782742806821c3f22e1a544f524a1bcf303a9ba80f8c05553df5ec62b921f728",
+      "executable": false
+    },
+    {
+      "path": "public/scenes/corporate-office.jpg",
+      "bytes": 227786,
+      "sha256": "63c30a6107e476ccb8ac1c712bebe147f894a2d49807905d22e13ce32fd3c284",
+      "executable": false
+    },
+    {
+      "path": "public/scenes/coworking.jpg",
+      "bytes": 215760,
+      "sha256": "d8caf8d92d3928dea9d312997d9f6efe5d51031b29773c44ab00ae4e6cd2ab80",
+      "executable": false
+    },
+    {
+      "path": "public/scenes/home-office.jpg",
+      "bytes": 253378,
+      "sha256": "5dba16a8cd17f1aceca0a4342c7750e32cca764f3908261707f566d33894de47",
+      "executable": false
+    },
+    {
+      "path": "public/scenes/house.jpg",
+      "bytes": 243831,
+      "sha256": "8153e42cf21f02da6e6d82140608305671111048357b7220ca21b66ef15e08f5",
+      "executable": false
+    },
+    {
+      "path": "public/scenes/japanese-cafe.jpg",
+      "bytes": 521501,
+      "sha256": "f70076fd804f41b71d4e9d1f36d784f4817ce32274c85be5a6925d70429f8472",
+      "executable": false
+    },
+    {
+      "path": "public/scenes/laptop.jpg",
+      "bytes": 254228,
+      "sha256": "3a00748c6ccfd75cf97ad9f3f4ca6d08aaac77f3815ee188588592e590001a7f",
+      "executable": false
+    },
+    {
+      "path": "public/scenes/tech-office.jpg",
+      "bytes": 96344,
+      "sha256": "9ad6f54d91b71767acdd2ef6e8f289c4092f7aedd2490fd714cc8507b653a91e",
+      "executable": false
+    },
+    {
+      "path": "public/screenshot.png",
+      "bytes": 26445,
+      "sha256": "120f1490e58da93ecda8aa4e3733d22f044d66edcffe5e8462fe570773c25e71",
+      "executable": false
+    },
+    {
+      "path": "public/wallpapers/coffee-shop.jpg",
+      "bytes": 230686,
+      "sha256": "39b4b6e340dfdca272c5c61c9d144c030b943e52d59348a96ab5c909b28fd7db",
+      "executable": false
+    },
+    {
+      "path": "public/wallpapers/corporate-office.jpg",
+      "bytes": 298483,
+      "sha256": "4bdb0d99f2499263498b9da0815c170512221dd4ade306e87c6039391cdadbb4",
+      "executable": false
+    },
+    {
+      "path": "public/wallpapers/coworking.jpg",
+      "bytes": 193750,
+      "sha256": "ff974fbf5dc6605655c439f228734c237b00dd43c5889f81cd1432c2cfcfe015",
+      "executable": false
+    },
+    {
+      "path": "public/wallpapers/home-office.jpg",
+      "bytes": 227222,
+      "sha256": "48ce7cfeb9ab91169b01c8f539a6f9c0b749bf8c32d1cdcb45b2276f6f592a7c",
+      "executable": false
+    },
+    {
+      "path": "public/wallpapers/house.jpg",
+      "bytes": 254428,
+      "sha256": "c8d03763a6c51c82889186468a2d5667cae325b40d78eb6e0c58568b52236bd0",
+      "executable": false
+    },
+    {
+      "path": "public/wallpapers/tech-office.jpg",
+      "bytes": 80256,
+      "sha256": "3a83f9422bf1dfa1086725d7b7e788ebab894e235e520e4a63c601fdf35558b0",
+      "executable": false
+    },
+    {
+      "path": "scripts/check-download.mjs",
+      "bytes": 2002,
+      "sha256": "4b4deed22bc5b9319112e621fb34a0d12c4631f835627933dc0cab771a99ef13",
+      "executable": false
+    },
+    {
+      "path": "scripts/check-server-resources.mjs",
+      "bytes": 1393,
+      "sha256": "2d697bd350c681431f235dc38a3b589a0bc08592445a5aa07c021e9591214153",
+      "executable": false
+    },
+    {
+      "path": "scripts/live-integration.py",
+      "bytes": 2499,
+      "sha256": "d308e5ca06670a3fa4d15ef74afa39fb0268b22e411ee6ace05d310ab1b90de0",
+      "executable": false
+    },
+    {
+      "path": "scripts/security-native.yml",
+      "bytes": 861,
+      "sha256": "5401f1e04ea810843913b326f20c2006a64dfe86f17d1f36cef891c26a80bd66",
+      "executable": false
+    },
+    {
+      "path": "scripts/security-scan.py",
+      "bytes": 1416,
+      "sha256": "61b4ac1e90050d73e6c9a3cdb584475250a3bf8843289b1913ad548322438e64",
+      "executable": false
+    },
+    {
+      "path": "scripts/security.test.mjs",
+      "bytes": 1872,
+      "sha256": "6c25e4dae4ab9089596ce59ae4da819f34546c2159b6bd389429a3295a8b4c96",
+      "executable": false
+    },
+    {
+      "path": "scripts/set-release-version.mjs",
+      "bytes": 2071,
+      "sha256": "0e5ea65aefe03ef1307999273ae86bd78d9a11c37c93722068079a050d6207b8",
+      "executable": false
+    },
+    {
+      "path": "scripts/verify.sh",
+      "bytes": 288,
+      "sha256": "bd22c327b7eb2997734d1f7a2e98b70bfd0854535d30ab790b1f6c86ad8ced3e",
+      "executable": true
+    },
+    {
+      "path": "tests/web/security.spec.ts",
+      "bytes": 3313,
+      "sha256": "420e77455af991890cd22a1ff9431dbcdead8ac4e4f2baf0262a5e5021823526",
+      "executable": false
+    },
+    {
+      "path": "tsconfig.json",
+      "bytes": 698,
+      "sha256": "b24da0d173a0cef45decc36feb63fa189fb87f31cbe5f96c7902ed4ec973396f",
+      "executable": false
+    },
+    {
+      "path": "vercel.json",
+      "bytes": 126,
+      "sha256": "2bb97b345ca97ff42b0902d69dbc7d2d1acdd13ab8838fb28cdcf97e43701da2",
+      "executable": false
+    }
+  ]
+}

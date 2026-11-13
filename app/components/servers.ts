@@ -1,0 +1,410 @@
+import type { ColonState, ServiceIconName } from './icons'
+import type { Localizer } from './languages'
+
+// Sample data for the marketing demo. Keep presentation aligned with the native SwiftUI views.
+// Memory values use binary MB, matching Theme.swift / Format.
+
+export type Agent = 'claude' | 'codex'
+export type CleanUpReason = 'deleted' | 'idle' | 'leaking'
+
+export type Server = {
+  port: string
+  stopped?: boolean
+  name: string
+  branch: string
+  status: ColonState
+  memory: number // binary MB
+  cpu: number // % of one core
+  cpuNote: string
+  uptime: string
+  startedMinutesAgo: number
+  context: { agent?: Agent; text: string; tone?: 'amber' }
+  session?: { agent: Agent; title: string; id: string }
+  chart: 'steady' | 'leaking' | 'flat'
+  spark: string
+  processes: { pid: number; command: string; memory: number; cpu: number }[]
+  info: [label: string, value: string][]
+  cleanUp?: { reason: CleanUpReason; note: string; suggested: boolean }
+  // A port published by a container. Its one "process" stands for the container, so totals and Stop
+  // treat it as a unit, like ServerResources.swift keys containers by id.
+  container?: { runtime: string; image: string; id: string; branch: string; project: string; service: ServiceIconName }
+  // Protected from Clean up, like databases in the app.
+  protected?: true
+  // The popover's row context, clean-up reason and running time, in the app's own phrases.
+  lines: (l: Localizer) => { context: string; note?: string; running: string }
+}
+
+export const SERVERS: Server[] = [
+  {
+    port: '3000',
+    name: 'devdock',
+    branch: 'menubar-port-monitor',
+    status: 'on',
+    memory: 1240,
+    cpu: 12,
+    cpuNote: 'spikes on rebuild',
+    uptime: 'up 3h 12m',
+    startedMinutesAgo: 192,
+    context: { agent: 'claude', text: 'DevDock · up 3h' },
+    lines: (l) => ({ context: `DevDock · ${l.format('up %@', l.duration(180, true))}`, running: l.duration(192) }),
+    session: { agent: 'claude', title: 'Dot-grid menu bar icon', id: '68c8fda6' },
+    chart: 'steady',
+    spark: 'M0 13 L4 12 L8 12.5 L12 10 L16 11 L20 8 L24 9 L28 7 L32 8 L36 6 L40 6.5 L44 5',
+    processes: [
+      { pid: 48212, command: 'node next dev', memory: 796, cpu: 9 },
+      { pid: 48213, command: 'next-server', memory: 418, cpu: 3 },
+      { pid: 48214, command: 'tailwindcss --watch', memory: 26, cpu: 0 },
+    ],
+    info: [
+      ['Folder', '~/conductor/workspaces/devdock/providence'],
+      ['Framework', 'Next.js 14'],
+      ['Command', 'npm run dev'],
+      ['PID', '48213'],
+      ['Started', 'Today 10:12 AM'],
+      ['Workspace', 'Conductor · providence'],
+    ],
+  },
+  {
+    port: '3001',
+    name: 'devdock-demo',
+    branch: 'main',
+    status: 'on',
+    memory: 612,
+    cpu: 2,
+    cpuNote: 'quiet',
+    uptime: 'up 1d 4h',
+    startedMinutesAgo: 1680,
+    context: { text: 'devdock-demo · up 1d' },
+    lines: (l) => ({ context: `devdock-demo · ${l.format('up %@', l.duration(1680, true))}`, running: l.duration(1680) }),
+    chart: 'steady',
+    spark: 'M0 10 L4 10.5 L8 9.5 L12 10 L16 9 L20 10 L24 9.5 L28 10 L32 9 L36 9.5 L40 9 L44 9.5',
+    processes: [
+      { pid: 30877, command: 'astro dev', memory: 571, cpu: 2 },
+      { pid: 30878, command: 'esbuild', memory: 41, cpu: 0 },
+    ],
+    info: [
+      ['Folder', '~/Sites/devdock-demo'],
+      ['Framework', 'Astro 4'],
+      ['Command', 'npm run dev -- --port 3001'],
+      ['PID', '30877'],
+      ['Started', 'Yesterday 9:02 AM'],
+      ['Git', 'clean'],
+    ],
+  },
+  {
+    port: '5173',
+    name: 'paper-plugins',
+    branch: 'feat/export-svg',
+    status: 'on',
+    memory: 184,
+    cpu: 0,
+    cpuNote: 'idle since 8:31',
+    uptime: 'idle 5h',
+    startedMinutesAgo: 300,
+    context: { agent: 'codex', text: 'paper plugins · idle 5h' },
+    lines: (l) => ({
+      context: `paper plugins · ${l.format('idle %@', l.duration(300, true))}`,
+      note: l.format('Idle %@ · no connections', l.duration(300, true)),
+      running: l.duration(300),
+    }),
+    session: { agent: 'codex', title: 'SVG export for frames', id: 'c7e20b91' },
+    chart: 'flat',
+    spark: 'M0 13 L4 13 L8 12.5 L12 13 L16 13 L20 13 L24 12.5 L28 13 L32 13 L36 13 L40 13 L44 13',
+    processes: [
+      { pid: 51092, command: 'vite', memory: 142, cpu: 0 },
+      { pid: 51093, command: 'esbuild', memory: 42, cpu: 0 },
+    ],
+    info: [
+      ['Folder', '~/conductor/workspaces/paper-plugins/lisbon'],
+      ['Framework', 'Vite 5'],
+      ['Command', 'pnpm dev'],
+      ['PID', '51092'],
+      ['Started', 'Today 7:58 AM'],
+      ['Workspace', 'Conductor · lisbon'],
+    ],
+    cleanUp: { reason: 'idle', note: 'Idle 5h · no connections', suggested: true },
+  },
+  {
+    port: '5432',
+    name: 'shop-db-1',
+    branch: 'db',
+    status: 'on',
+    memory: 182,
+    cpu: 1,
+    cpuNote: 'quiet',
+    uptime: 'up 2d',
+    startedMinutesAgo: 2880,
+    context: { text: 'postgres:16-alpine · up 2d' },
+    lines: (l) => ({ context: `postgres:16-alpine · ${l.format('up %@', l.duration(2880, true))}`, running: l.duration(2880) }),
+    chart: 'steady',
+    spark: 'M0 11 L4 11 L8 10.5 L12 11 L16 11 L20 10.5 L24 11 L28 10.5 L32 11 L36 10.5 L40 11 L44 10.5',
+    processes: [{ pid: 54320, command: 'shop-db-1', memory: 182, cpu: 1 }],
+    info: [
+      ['Folder', '~/Code/shop'],
+      ['Image', 'postgres:16-alpine'],
+      ['Started', 'Mon 9:12 AM'],
+      ['Address', '0.0.0.0 · [::]'],
+    ],
+    container: { runtime: 'OrbStack', image: 'postgres:16-alpine', id: '4f2a9c81e7b3', branch: 'main', project: 'shop', service: 'postgres' },
+    protected: true,
+  },
+  {
+    port: '6379',
+    name: 'shop-redis-1',
+    branch: 'redis',
+    status: 'on',
+    memory: 24,
+    cpu: 1,
+    cpuNote: 'quiet',
+    uptime: 'up 2d',
+    startedMinutesAgo: 2880,
+    context: { text: 'redis:7-alpine · up 2d' },
+    lines: (l) => ({ context: `redis:7-alpine · ${l.format('up %@', l.duration(2880, true))}`, running: l.duration(2880) }),
+    chart: 'flat',
+    spark: 'M0 10 L4 10 L8 10 L12 9.5 L16 10 L20 10 L24 10 L28 9.5 L32 10 L36 10 L40 10 L44 10',
+    processes: [{ pid: 54321, command: 'shop-redis-1', memory: 24, cpu: 1 }],
+    info: [
+      ['Folder', '~/Code/shop'],
+      ['Image', 'redis:7-alpine'],
+      ['Started', 'Mon 9:12 AM'],
+      ['Address', '0.0.0.0 · [::]'],
+    ],
+    container: { runtime: 'OrbStack', image: 'redis:7-alpine', id: '9c1e7d2ab04f', branch: 'main', project: 'shop', service: 'redis' },
+    protected: true,
+  },
+  {
+    port: '6006',
+    name: 'design-system',
+    branch: 'tokens-v2',
+    status: 'amber',
+    memory: 2810,
+    cpu: 34,
+    cpuNote: 'climbing since 1:14',
+    uptime: 'up 2h 40m',
+    startedMinutesAgo: 160,
+    context: { text: '+1.1 GB in 10 min', tone: 'amber' },
+    lines: (l) => ({
+      context: l.format('+%@ in %@', '1.1 GB', l.text('10 min')),
+      note: l.format('Leaking · +%@', '1.1 GB'),
+      running: l.duration(160),
+    }),
+    session: { agent: 'claude', title: 'Tokens v2 migration', id: 'a3f19c07' },
+    chart: 'leaking',
+    spark: 'M0 16 L4 15.5 L8 14.5 L12 14 L16 12.5 L20 12 L24 10 L28 9 L32 7 L36 5.5 L40 4 L44 2',
+    processes: [
+      { pid: 61540, command: 'storybook dev -p 6006', memory: 2210, cpu: 30 },
+      { pid: 61541, command: 'webpack', memory: 548, cpu: 4 },
+      { pid: 61542, command: 'node', memory: 52, cpu: 0 },
+    ],
+    info: [
+      ['Folder', '~/Code/design-system/worktrees/tokens-v2'],
+      ['Framework', 'Storybook 8'],
+      ['Command', 'npm run storybook'],
+      ['PID', '61540'],
+      ['Started', 'Today 10:44 AM'],
+      ['Git', '3 changed files'],
+      ['Workspace', 'Pane · tokens-v2'],
+    ],
+    cleanUp: { reason: 'leaking', note: 'Leaking · +1.1 GB in 10 min', suggested: false },
+  },
+  {
+    port: '8000',
+    name: 'api',
+    branch: 'fix/auth-timeout',
+    status: 'idle',
+    memory: 96,
+    cpu: 0,
+    cpuNote: 'no requests in 2d',
+    uptime: 'idle 2d',
+    startedMinutesAgo: 2880,
+    context: { text: 'Worktree deleted · idle 2d' },
+    lines: (l) => ({
+      context: l.format('Worktree deleted · idle %@', l.duration(2880, true)),
+      note: l.text('Worktree deleted'),
+      running: l.duration(2880),
+    }),
+    chart: 'flat',
+    spark: 'M0 12 L44 12',
+    processes: [{ pid: 22718, command: 'uvicorn main:app', memory: 96, cpu: 0 }],
+    info: [
+      ['Folder', '~/Code/api-fix-auth (deleted)'],
+      ['Framework', 'FastAPI'],
+      ['Command', 'uvicorn main:app --port 8000'],
+      ['PID', '22718'],
+      ['Started', 'Mon 3:40 PM'],
+      ['Worktree', 'deleted'],
+    ],
+    cleanUp: { reason: 'deleted', note: 'Worktree deleted', suggested: true },
+  },
+]
+
+// Match ServerResources.swift: shared processes count once in totals and
+// contribute equal shares to each port's memory-bar segment.
+export function serverResources(servers: Server[]) {
+  const processes = new Map<number, Server['processes'][number]>()
+  const ports = new Map<number, Set<string>>()
+  for (const server of servers) {
+    for (const process of server.processes) {
+      processes.set(process.pid, process)
+      const owners = ports.get(process.pid) ?? new Set<string>()
+      owners.add(server.port)
+      ports.set(process.pid, owners)
+    }
+  }
+  let memory = 0
+  let cpu = 0
+  const memoryByPort = new Map<string, number>()
+  processes.forEach((process, pid) => {
+    memory += process.memory
+    cpu += process.cpu
+    const owners = ports.get(pid)!
+    owners.forEach((port) => {
+      memoryByPort.set(port, (memoryByPort.get(port) ?? 0) + process.memory / owners.size)
+    })
+  })
+  return { memory, cpu, memoryByPort }
+}
+
+// Closing a process closes all its listening ports. Independent siblings stay up.
+export function stoppedPorts(servers: Server[], selected: string[]) {
+  const targets = new Set(servers.filter((s) => selected.includes(s.port)).flatMap((s) => s.processes.map((p) => p.pid)))
+  return servers.filter((s) => s.processes.some((p) => targets.has(p.pid))).map((s) => s.port)
+}
+
+export type ServerSort = 'usage' | 'recency' | 'name' | 'port'
+export const SERVER_SORTS: [ServerSort, string][] = [['usage', 'Usage'], ['recency', 'Recency'], ['name', 'Name'], ['port', 'Port']]
+
+// The branch without its prefix, as in ProjectInfo.listBranch with its default setting. The detail view keeps the full name.
+export function shortBranch(branch: string) {
+  return branch.slice(branch.lastIndexOf('/') + 1)
+}
+
+// Ties fall back to port, as in ServerSort in Server.swift.
+export function sortServers(servers: Server[], sort: ServerSort) {
+  const byPort = (a: Server, b: Server) => Number(a.port) - Number(b.port)
+  return [...servers].sort((a, b) => {
+    if (sort === 'usage') return b.memory - a.memory || byPort(a, b)
+    if (sort === 'recency') return a.startedMinutesAgo - b.startedMinutesAgo || byPort(a, b)
+    if (sort === 'name') return shortBranch(a.branch).localeCompare(shortBranch(b.branch), undefined, { numeric: true }) || byPort(a, b)
+    return byPort(a, b)
+  })
+}
+
+// Native servers come first with no header, then one group per compose project, as in
+// ServerSection in Server.swift. Takes servers already in display order.
+export type ServerSection = { id: string; title?: string; detail?: string; servers: Server[] }
+export function serverSections(servers: Server[], sort: ServerSort): ServerSection[] {
+  const groups = new Map<string, Server[]>()
+  for (const server of servers) {
+    if (!server.container) continue
+    const key = `${server.container.runtime}/${server.container.project}`
+    groups.set(key, [...(groups.get(key) ?? []), server])
+  }
+  const lowest = (rows: Server[]) => Math.min(...rows.map((s) => Number(s.port)))
+  const total = (rows: Server[]) => serverResources(rows).memory
+  const newest = (rows: Server[]) => Math.min(...rows.map((s) => s.startedMinutesAgo))
+  const ordered = Array.from(groups.entries()).sort(([, a], [, b]) => {
+    if (sort === 'usage' && total(a) !== total(b)) return total(b) - total(a)
+    if (sort === 'recency' && newest(a) !== newest(b)) return newest(a) - newest(b)
+    if (sort === 'name') {
+      const order = a[0].container!.project.localeCompare(b[0].container!.project, undefined, { numeric: true })
+      if (order) return order
+    }
+    return lowest(a) - lowest(b)
+  })
+  const native = servers.filter((s) => !s.container)
+  return [
+    ...(native.length ? [{ id: 'native', servers: native }] : []),
+    ...ordered.map(([id, rows]) => {
+      const { project, runtime, branch } = rows[0].container!
+      return { id, title: project, detail: `${runtime} · ${branch}`, servers: rows }
+    }),
+  ]
+}
+
+// A paused server is frozen: no CPU, no warnings, and Clean up leaves it alone.
+export function pausedServer(server: Server): Server {
+  const project = server.container?.image ?? server.name.replaceAll('-', ' ')
+  return {
+    ...server,
+    status: 'paused',
+    cpu: 0,
+    uptime: 'Paused',
+    context: { agent: server.context.agent, text: `${project} · paused` },
+    cleanUp: undefined,
+    lines: (l) => ({ ...server.lines(l), context: `${project} · ${l.text('paused')}`, note: undefined }),
+    processes: server.processes.map((process) => ({ ...process, cpu: 0 })),
+  }
+}
+
+// Stable identities: stopping a server must not recolor the remaining ports.
+const PORT_COLORS = ['#6EC7ED', '#B599F0', '#EB9CD4', '#7D9CF2', '#7DDBE0', '#D9A3F2', '#ABC2E0']
+export const portColor = (port: string) =>
+  PORT_COLORS[
+    Math.max(
+      0,
+      SERVERS.findIndex((s) => s.port === port),
+    ) % PORT_COLORS.length
+  ]
+
+export const SYSTEM_MEMORY = 16 * 1024
+export const OTHER_APPS = [
+  { id: 'chrome', name: 'Google Chrome', memory: 1536 },
+  { id: 'conductor', name: 'Conductor', memory: 768 },
+  { id: 'rest', name: 'Everything else', memory: 4864 },
+]
+export const OTHER_MEMORY = OTHER_APPS.reduce((sum, app) => sum + app.memory, 0)
+
+export function formatTotal(mb: number) {
+  return mb >= 1024 ? `${Number((mb / 1024).toFixed(1))} GB` : `${Math.round(mb)} MB`
+}
+
+export function formatMemory(mb: number) {
+  return mb >= 1024 ? `${(mb / 1024).toFixed(2)} GB` : `${Math.round(mb)} MB`
+}
+
+// Deterministic ten-minute histories for both synchronized detail charts.
+const WOBBLE = [
+  40, 39.2, 38.2, 39.3, 39.6, 40.2, 40.1, 38.6, 38, 37.2, 38.1, 38.8, 38.8, 38, 37.7, 36.5, 35.7, 35.8, 37, 37.6, 36.5,
+  36.5, 34.5, 34.8, 35.5, 36.3, 36.4, 35.4, 35, 33.6, 34.3, 37.3, 37.9, 36.5, 35, 33.7, 32.2, 32.1, 32.8, 33.2, 33.7,
+  33.4, 31.8, 30.9, 31.1, 31.2, 32, 32, 31.6, 31, 29.3, 30, 30.1, 30.5, 31.5, 30.6, 30, 28.3, 28, 29.1,
+]
+
+const LEAK =
+  'M0 33.4 L11.3 33 L22.6 33.8 L33.9 32.6 L45.2 32.2 L56.6 32.6 L67.9 30.8 L79.2 31.2 L90.5 29.4 L101.8 29.8 L113.1 27.9 L124.4 26.7 L135.7 27.1 L147 24.8 L158.3 23.7 L169.7 24 L181 21.4 L192.3 20 L203.6 19.2 L214.9 17 L226.2 15.2 L237.5 13.8 L248.8 11.9 L260.1 10.4 L271.4 9.3 L282.8 8.1 L294.1 7 L305.4 6.2 L316.7 5.5 L327 4.8'
+
+export function memoryChart(server: Server) {
+  const raw =
+    server.chart === 'leaking'
+      ? Array.from(LEAK.matchAll(/[ML]([\d.]+) ([\d.]+)/g), (match) => Number(match[2]))
+      : WOBBLE
+  const last = raw[raw.length - 1]
+  const values = raw.map(
+    (y) =>
+      server.memory -
+      (y - last) * (server.chart === 'leaking' ? 1126 / (raw[0] - last) : server.chart === 'flat' ? 0.1 : 8),
+  )
+  const top = Math.max(2048, ...values.map((mb) => mb * 1.1))
+  const points = values.map((mb, i) => ({ x: (i * 328) / (values.length - 1), y: 56 * (1 - mb / top), memory: mb }))
+  return {
+    points,
+    line: `M${points.map((p) => `${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' L')}`,
+    end: points[points.length - 1].y,
+    limit: 56 * (1 - 2048 / top),
+  }
+}
+
+// CPU history, scaled so the final sample matches the current reading.
+const CPU = [
+  4.3, 2.1, 3.6, 3.2, 3.1, 2.6, 4.1, 4.5, 2.7, 3.4, 1.1, 3.6, 16, 17.3, 4.1, 2, 2.4, 3.5, 0.9, 2.6, 1.5, 1.3, 1.1, 3.9,
+  1.3, 1.8, 2.4, 4.3, 1.2, 2.6, 3, 4.3, 4.1, 4.2, 1.9, 2.5, 2.2, 4.3, 4.6, 1.4, 1.5, 14.3, 14.4, 15.3, 3.1, 1.9, 0.9,
+  2.5, 2.3, 3.1, 4.6, 3.5, 2.9, 3.3, 3.5, 1.1, 4.4, 3.9, 4.3, 4,
+]
+
+// A paused server keeps its history; only the latest reading drops to zero.
+export function cpuBars(server: Server) {
+  const cpu = SERVERS.find((s) => s.port === server.port)?.cpu ?? server.cpu
+  const bars = CPU.map((h) => Math.min(100, (h / CPU[CPU.length - 1]) * cpu))
+  if (server.status === 'paused') bars[bars.length - 1] = 0
+  return bars
+}
